@@ -90,7 +90,10 @@ alias :q='exit'
 alias q='exit'
 alias open='xdg-open'
 alias nvrun='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME="nvidia" __VK_LAYER_NV_optimus="NVIDIA_only" '
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME '
+alias dotpush='dotfiles push'
+alias dotstatus='dotfiles status'
+alias dotcam='dotfiles commit -am'
 
 # function "aliases
 compdef -d mmd # needed to remove conflict of mcd with MultiMarkdown
