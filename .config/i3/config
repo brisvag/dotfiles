@@ -1,0 +1,237 @@
+# ################ #
+# GENERAL SETTINGS #
+# ################ #
+
+# GLOBALS
+
+# mod key is Windows Key
+set $mod Mod4
+
+# APPEARANCE
+
+# font for windows and terminals
+font pango:inconsolata bold 14
+# colors
+set $bg_act		    #505050
+set $text_act	    #FFFFFF
+set $border_act	    #BEBEBE
+set $bg_inact	    #1F1F1F
+set $text_inact	    #929292
+set $bg_urg		    #900000
+set $text_urg	    #FFFFFF
+set $plhold	        #0c0c0c
+set $bg_client		#FFFFFF
+# set colors for windows and borders
+# class                 border  	backgr. 	text    	indicator 		child_border
+client.focused          $bg_act	    $bg_act	    $text_act	$border_act	    $bg_act
+client.focused_inactive $bg_inact	$bg_inact	$text_act	$bg_inact		$bg_inact
+client.unfocused        $bg_inact	$bg_inact	$text_act	$bg_inact		$bg_inact
+client.urgent           $bg_urg	    $bg_urg	    $text_urg	$bg_urg	    	$bg_urg
+client.placeholder      $plhold	    $plhold	    $text_act	$plhold	    	$plhold
+client.background       $bg_client
+# add gaps (if you want to remove title bars, change 'normal' to 'pixel')
+for_window [class="^.*"] border normal 2
+gaps inner 8
+gaps outer -1
+# show borders and gaps only when the workspace has more than one container
+smart_borders on
+smart_gaps on
+# base title format
+for_window [class="^.*"] title_format "<span font_weight='heavy'>%title</span>"
+# this is the thin space charachter used before and after icons: " "
+# icons for specific title bars
+for_window [class="(.*)firefox(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
+for_window [class="(.*)Termite(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
+for_window [class="(.*)Chromium(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
+for_window [class="(.*)jetbrains-pycharm(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
+
+# WINDOW-SPECIFIC SETTINGS
+
+# make spotify open on workspace 10
+for_window [class="Spotify"] move to workspace 10
+# make franz open on the scratchpad with the right size
+for_window [class="Franz"] move scratchpad
+for_window [class="Franz"] resize set 1400 900, move absolute position center
+# fix vmd layout on startup
+for_window [title="VMD Main"] floating toggle
+
+
+# ############ #
+# KEY BINDINGS #
+# ############ #
+
+# WINDOW MANAGEMENT
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+# kill focused window
+bindsym $mod+q kill
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+# change focus (vimlike)
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# move focused window (vimlike)
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# resize focused window
+bindsym $mod+Mod1+Left resize shrink width 2 px or 2 ppt
+bindsym $mod+Mod1+Up resize grow height 2 px or 2 ppt
+bindsym $mod+Mod1+Down resize shrink height 2 px or 2 ppt
+bindsym $mod+Mod1+Right resize grow width 2 px or 2 ppt
+# resize focused window (vimlike)
+bindsym $mod+Mod1+h resize shrink width 2 px or 2 ppt
+bindsym $mod+Mod1+j resize grow height 2 px or 2 ppt
+bindsym $mod+Mod1+k resize shrink height 2 px or 2 ppt
+bindsym $mod+Mod1+l resize grow width 2 px or 2 ppt
+# split in horizontal orientation
+bindsym $mod+g split h
+# split in vertical orientation
+bindsym $mod+v split v
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+bindsym $mod+e layout toggle split
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# toggle sticky window
+bindsym $mod+o sticky toggle
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+# focus the parent container
+bindsym $mod+a focus parent
+# focus the child container
+bindsym $mod+s focus child
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+#scratchpad: hidden floating workspace
+bindsym $mod+z scratchpad show
+bindsym $mod+Shift+z move scratchpad
+# cycle through worskspaces
+bindsym $mod+Tab workspace next
+# close every window on every workspace
+bindsym $mod+Mod1+q [class=".*"] kill
+
+# APPLICATIONS SHORTCUTS
+
+# start a terminal. Open in directory of currently focussed process.
+bindsym $mod+Return exec i3-sensible-terminal -d "`xcwd`"
+# start rofi (dmenu alternative)
+bindsym $mod+d exec "rofi -show drun -theme ~/.config/rofi/brisvag.rasi"
+# open firefox
+bindsym $mod+c exec firefox
+# and open firefox in youtube mode
+bindsym $mod+y exec "firefox -new-window https://youtube.com/"
+# and in incognito mode
+bindsym $mod+x exec "firefox -private-window"
+# open spotify using mod+play
+bindsym $mod+XF86AudioPlay exec spotify
+# open ranger (file mamager)
+bindsym $mod+r exec i3-sensible-terminal -e ranger "`xcwd`"
+# take a screenshot using the import command from imagemagick and xclip to copy to clipboard
+bindsym --release $mod+p exec "import ~/pictures/i3screenshot.png && xclip -selection clipboard -target image/png ~/pictures/i3screenshot.png"
+
+# $mod+Shift+p is taken by keepass!
+
+# SYSTEM SHORTCUTS
+
+# restart i3 inplace
+bindsym $mod+Shift+c restart
+# lock screen with fancy blur, disabling dunst in the meantime
+bindsym $mod+Shift+b exec "notify-send \\"DUNST_COMMAND_PAUSE\\"; i3lock-fancy-rapid 7 4 -n; notify-send \\"DUNST_COMMAND_RESUME\\""
+# logout
+bindsym $mod+Shift+t exec i3-msg exit
+# reboot
+bindsym $mod+Shift+r exec systemctl reboot
+# shutdown
+bindsym $mod+Shift+s exec shutdown now
+
+# $mod+u is taken by ibus for keyboard switch
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+# Multimedia controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+# Brightness controls
+bindsym XF86MonBrightnessDown exec "light -U 5"
+bindsym XF86MonBrightnessUp exec "light -A 5"
+# remember that $mod+n is used by dunst to close all notifications!
+
+
+# ################ #
+# STARTUP COMMANDS #
+# ################ #
+
+# start polybar
+exec --no-startup-id ~/.config/polybar/launch.sh
+# fix dpi
+exec --no-startup-id xrandr --dpi 75
+# policykit agent
+exec --no-startup-id /usr/bin/lxqt-policykit-agent
+# network manager applet
+exec --no-startup-id nm-applet
+# pulseaudio
+exec --no-startup-id start-pulseaudio-x11
+# bluetooth
+exec --no-startup-id blueman-applet
+# notification manager
+exec --no-startup-id dunst -conf .config/dunst/dunstrc
+# composite manager for transparency and other improvements
+exec --no-startup-id picom --config ~/.config/picom.conf --experimental-backends --blur-method dual_kawase --blur-strength 3 -b
+# restore nitrogen to set the desktop wallpaper (the first time you have to run nitrogen to set your wallpaper)
+exec --no-startup-id nitrogen --restore
+# set as default the us keyboard layout
+exec --no-startup-id setxkbmap -layout us
+# unclutter (auto-hide cursor)
+exec --no-startup-id unclutter
+# battery warning script
+exec --no-startup-id ~/.config/i3/i3-battery-popup -L 15 -n
+# ibus
+exec --no-startup-id ibus-daemon -xdr
+# refresh system time if it was fucked up
+exec --no-startup-id timedatectl
+# swap escape and caps lock
+exec --no-startup-id setxkbmap -option caps:swapescape
+
+# open some applications at startup
+exec --no-startup-id i3-msg 'exec firefox; exec franz'
+
+# open applications that need delayed startup
+exec --no-startup-id ~/.config/i3/delayed_startup.sh
