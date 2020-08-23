@@ -148,7 +148,7 @@ bindsym $mod+Mod1+q [class=".*"] kill
 # APPLICATIONS SHORTCUTS
 
 # start a terminal. Open in directory of currently focussed process.
-bindsym $mod+Return exec i3-sensible-terminal -d "`xcwd`"
+bindsym $mod+Return exec termite -d "`xcwd`"
 # start rofi (dmenu alternative)
 bindsym $mod+d exec "rofi -show drun -theme ~/.config/rofi/brisvag.rasi"
 # open firefox
@@ -160,7 +160,7 @@ bindsym $mod+x exec "firefox -private-window"
 # open spotify using mod+play
 bindsym $mod+XF86AudioPlay exec spotify
 # open ranger (file mamager)
-bindsym $mod+r exec i3-sensible-terminal -e ranger "`xcwd`"
+bindsym $mod+r exec termite -e ranger "`xcwd`"
 # take a screenshot using the import command from imagemagick and xclip to copy to clipboard
 bindsym --release $mod+p exec "import ~/pictures/i3screenshot.png && xclip -selection clipboard -target image/png ~/pictures/i3screenshot.png"
 

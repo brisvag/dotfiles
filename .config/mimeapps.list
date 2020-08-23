@@ -252,3 +252,5 @@ x-scheme-handler/mailto=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/franz=franz.desktop
 
+[Added Associations]
+text/plain=nvim.desktop;
