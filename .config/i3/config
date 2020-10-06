@@ -227,11 +227,11 @@ exec --no-startup-id ~/.config/i3/i3-battery-popup -L 15 -n
 exec --no-startup-id ibus-daemon -xdr
 # refresh system time if it was fucked up
 exec --no-startup-id timedatectl
-# swap escape and caps lock
-exec --no-startup-id setxkbmap -option caps:swapescape
 
 # open some applications at startup
-exec --no-startup-id i3-msg 'exec firefox; exec franz'
+exec --no-startup-id i3-msg 'exec firefox; exec franz; exec keepassxc'
+# swap escape and caps lock
+exec --no-startup-id setxkbmap -option caps:swapescape
 
 # open applications that need delayed startup
 exec --no-startup-id ~/.config/i3/delayed_startup.sh

@@ -32,6 +32,8 @@ nnoremap <esc>^[ <esc>^[
 set clipboard+=unnamedplus
 " change working directory to current file automatically
 set autochdir
+" relative numbers
+set relativenumber
 
 
 " APPEARANCE
@@ -85,7 +87,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'wellle/targets.vim'
 Plug 'lilydjwg/colorizer'
 Plug 'scrooloose/nerdtree'
-"Plug 'scrooloose/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree-git-plugin'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'liuchengxu/vista.vim'

@@ -100,7 +100,12 @@ alias dotfiles='dotgit ls-tree -r HEAD --name-only'
 # function "aliases
 compdef -d mmd # needed to remove conflict of mcd with MultiMarkdown
 mcd () {mkdir -p "$1" && cd "$1"}
-#gam () {git add "$1" && git commit -m "$2"} # need quotes on the message
+unalias gam # otherwise is used for `git am`
+gam () {git add "$1" && git commit -m "$2"} # need quotes on the message
+up () {
+    yay
+    vi +PlugUpdate +qall
+}
 
 
 # TEMPORARY STUFF
