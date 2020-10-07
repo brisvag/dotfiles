@@ -90,6 +90,8 @@ alias :q='exit'
 alias q='exit'
 alias open='xdg-open'
 alias nvrun='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME="nvidia" __VK_LAYER_NV_optimus="NVIDIA_only" '
+
+# dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME '
 alias dotpush='dotgit push'
 alias dotstatus='dotgit status'
