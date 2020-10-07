@@ -9,3 +9,6 @@ __pycache__/
 
 # venvs
 venv/
+
+# dotfiles directory
+.dotfiles/
