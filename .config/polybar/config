@@ -1,0 +1,192 @@
+[bar/bottom]
+bottom = true
+enable-ipc = true
+width = 100%
+height = 26
+dpi = 75
+
+background = #1F1F1F
+foreground = #FFFFFF
+
+line-color = ${bar/bottom.background}
+line-size = 0
+
+padding = 0
+module-margin = 1
+
+separator = |
+
+font-0 = Inconsolata:size=14;2
+font-1 = FontAwesome:style=Regular:size=14;2
+
+locale = en_US.UTF-8
+
+modules-left = i3
+modules-right = pulseaudio cpu memory filesystem backlight wired-network wireless-network battery date
+
+tray-position = right
+tray-maxsize = 20
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+overline-size = 10
+overline-color = ${self.background}
+underline-size = 2
+underline-color = ${self.background}
+
+[module/backlight]
+type = internal/backlight
+format =  <label>
+enable-scroll = true
+
+card =  intel_backlight
+
+label = %percentage%%
+
+[module/battery]
+type = internal/battery
+full-at = 99
+
+format-charging = %{F#ffa900}%{F-} <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+label-charging = %percentage%%
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+label-discharging = %percentage%%
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+[module/date]
+type = internal/date
+
+label = %date% - %time%
+label-foreground = #36a6dc
+date = %A, %d %B %Y
+time = %H:%M
+
+[module/memory]
+type = internal/memory
+format = <label>
+label =  %percentage_used:2%%
+label-foreground = #f4d425
+interval = 0.2
+
+[module/wireless-network]
+type = internal/network
+interface = wlp3s0
+interval = 1
+ping-interval = 10
+
+format-connected = <label-connected>
+label-connected =  %essid% - %local_ip%
+label-connected-foreground = #00a700
+label-disconnected =  not connected
+label-disconnected-foreground = #f53c3c
+
+[module/wired-network]
+type = internal/network
+interface = enp4s0
+interval = 1
+ping-interval = 10
+
+format-connected = <label-connected>
+label-connected =  %essid% - %local_ip%
+label-connected-foreground = #00a700
+label-disconnected =  not connected
+label-disconnected-foreground = #f53c3c
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+
+format-volume = <label-volume>
+format-muted = <label-muted>
+
+label-volume =  %percentage%%
+label-volume-foreground = #d931af
+label-muted =   %percentage%%
+label-muted-foreground = #f53c3c
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted =  %free% - %percentage_free%%
+label-mounted-foreground = #f4d425
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+wrapping-scroll = true
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 0
+label-mode-background = #e60053
+
+label-focused = %index%
+label-focused-foreground = #ffffff
+label-focused-background = #505050
+label-focused-underline = #fba922
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+label-visible = %index%
+label-visible-underline = #505050
+label-visible-padding = 2
+
+label-urgent = %index%
+label-urgent-foreground = #ffffff
+label-urgent-background = #900000
+label-urgent-padding = 2
+
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 0
+label-separator-foreground = #ffffff
+
+[module/cpu]
+type = internal/cpu
+
+interval = 0.5
+format = <label> <ramp-coreload>
+label = CPU %percentage:2%%
+
+ramp-coreload-spacing = 0.1
+ramp-coreload-0 = ▁
+ramp-coreload-0-foreground = #00a700
+ramp-coreload-1 = ▂
+ramp-coreload-1-foreground = #00a700
+ramp-coreload-2 = ▃
+ramp-coreload-2-foreground = #00a700
+ramp-coreload-3 = ▄
+ramp-coreload-3-foreground = #fba922
+ramp-coreload-4 = ▅
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+ramp-coreload-6-foreground = #900000
+ramp-coreload-7 = █
+ramp-coreload-7-foreground = #900000
