@@ -49,9 +49,9 @@ for_window [class="(.*)jetbrains-pycharm(.*)"] title_format "   <span fon
 
 # make spotify open on workspace 10
 for_window [class="Spotify"] move to workspace 10
-# make ferdi open on the scratchpad with the right size
+# make ferdi open on the scratchpad and resize (needs to be made visible)
 for_window [class="Ferdi"] move scratchpad
-for_window [class="Ferdi"] resize set 1400 900, move absolute position center
+for_window [class="Ferdi"] scratchpad show, resize set 1400 900, move position center, scratchpad show
 # fix vmd layout on startup
 for_window [title="VMD Main"] floating toggle
 
@@ -145,6 +145,14 @@ bindsym $mod+Tab workspace next
 # close every window on every workspace
 bindsym $mod+Mod1+q [class=".*"] kill
 
+# WORKSPACE MANAGEMENT
+
+# move workspaces to different monitors
+bindsym $mod+Ctrl+Shift+Left move workspace to output left
+bindsym $mod+Ctrl+Shift+Down move workspace to output down
+bindsym $mod+Ctrl+Shift+Up move workspace to output up
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+
 # APPLICATIONS SHORTCUTS
 
 # start a terminal. Open in directory of currently focussed process.
@@ -199,6 +207,8 @@ bindsym XF86MonBrightnessUp exec "light -A 5"
 # STARTUP COMMANDS #
 # ################ #
 
+# multi monitor setup
+exec --no-startup-id xrandr --output DP-3 --primary --mode 1920x1080 --pos 0x0 --output DP-0 --mode 1920x1200 --pos 1920x0
 # start polybar
 exec --no-startup-id ~/.config/polybar/launch.sh
 # fix dpi
