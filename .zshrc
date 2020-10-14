@@ -71,6 +71,9 @@ export LD_LIBRARY_PATH="$MGLROOT/lib/python2.7:$LD_LIBRARY_PATH"
 export FREEMOL="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol"
 export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHONPATH"
 
+# cuda
+export PATH="/opt/cuda/bin:$PATH"
+
 
 # ALIASES AND SIMILAR
 
