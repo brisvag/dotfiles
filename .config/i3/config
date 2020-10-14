@@ -49,9 +49,9 @@ for_window [class="(.*)jetbrains-pycharm(.*)"] title_format "   <span fon
 
 # make spotify open on workspace 10
 for_window [class="Spotify"] move to workspace 10
-# make franz open on the scratchpad with the right size
-for_window [class="Franz"] move scratchpad
-for_window [class="Franz"] resize set 1400 900, move absolute position center
+# make ferdi open on the scratchpad with the right size
+for_window [class="Ferdi"] move scratchpad
+for_window [class="Ferdi"] resize set 1400 900, move absolute position center
 # fix vmd layout on startup
 for_window [title="VMD Main"] floating toggle
 
@@ -225,11 +225,9 @@ exec --no-startup-id unclutter
 exec --no-startup-id ~/.config/i3/i3-battery-popup -L 15 -n
 # ibus
 exec --no-startup-id ibus-daemon -xdr
-# refresh system time if it was fucked up
-exec --no-startup-id timedatectl
 
 # open some applications at startup
-exec --no-startup-id i3-msg 'exec firefox; exec franz; exec keepassxc'
+exec --no-startup-id i3-msg 'exec firefox; exec ferdi; exec keepassxc'
 # swap escape and caps lock
 exec --no-startup-id setxkbmap -option caps:swapescape
 

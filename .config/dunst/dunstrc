@@ -226,9 +226,9 @@
 
 # INDIVIDUAL APP SETTINGS
 
-[franz]
-    appname = Franz
-    new_icon = franz
+[ferdi]
+    appname = Ferdi
+    new_icon = ferdi
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

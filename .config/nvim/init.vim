@@ -93,7 +93,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'liuchengxu/vista.vim'
 "Plug 'jiangmiao/auto-pairs'
 Plug 'vimwiki/vimwiki'
-"Plug 'danilamihailov/vim-tips-wiki'
 " languages
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
@@ -191,8 +190,8 @@ let g:vimwiki_list = [
 						\{
 						\'path': '~/git/wiki',
 						\'path_html': '~/git/wiki/html/',
-						\'syntax': 'default',
-						\'ext': '.wiki',
+						\'syntax': 'markdown',
+						\'ext': '.md',
 						\'template_path': '~/git/wiki/templates',
 						\'template_default': 'default',
 						\'template_ext': '.html',
