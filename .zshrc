@@ -10,6 +10,7 @@ ZSH_THEME="bira_venvfix"
 plugins=(
 	common-aliases
 	git
+    git-auto-fetch
 	colored-man-pages
 	colorize
 	pip
