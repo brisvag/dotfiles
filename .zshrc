@@ -93,12 +93,8 @@ alias open='xdg-open'
 alias nvrun='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME="nvidia" __VK_LAYER_NV_optimus="NVIDIA_only" '
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
-alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME '
-alias dotpush='dotgit push'
-alias dotstatus='dotgit status'
-alias dotdiff='dotgit diff'
-alias dotcam='dotgit commit -am'
-alias dotfiles='dotgit ls-tree -r HEAD --name-only'
+# this alias with env variables is better because it allows the use of other git aliases
+alias dot='GIT_DIR=~/.dotfiles/ GIT_WORK_TREE=~/ '
 
 # function "aliases
 compdef -d mmd # needed to remove conflict of mcd with MultiMarkdown
