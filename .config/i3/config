@@ -148,7 +148,7 @@ bindsym $mod+Mod1+q [class=".*"] kill
 # APPLICATIONS SHORTCUTS
 
 # start a terminal. Open in directory of currently focussed process.
-bindsym $mod+Return exec termite -d "`xcwd`"
+bindsym $mod+Return exec termite #-d "`xcwd`"
 # start rofi (dmenu alternative)
 bindsym $mod+d exec "rofi -show drun -theme ~/.config/rofi/brisvag.rasi"
 # open firefox
@@ -209,8 +209,6 @@ exec --no-startup-id /usr/bin/lxqt-policykit-agent
 exec --no-startup-id nm-applet
 # pulseaudio
 exec --no-startup-id start-pulseaudio-x11
-# bluetooth
-exec --no-startup-id blueman-applet
 # notification manager
 exec --no-startup-id dunst -conf .config/dunst/dunstrc
 # composite manager for transparency and other improvements
@@ -221,8 +219,6 @@ exec --no-startup-id nitrogen --restore
 exec --no-startup-id setxkbmap -layout us
 # unclutter (auto-hide cursor)
 exec --no-startup-id unclutter
-# battery warning script
-exec --no-startup-id ~/.config/i3/i3-battery-popup -L 15 -n
 # ibus
 exec --no-startup-id ibus-daemon -xdr
 

@@ -1,4 +1,5 @@
 [bar/bottom]
+monitor = ${env:MONITOR:}
 bottom = true
 enable-ipc = true
 width = 100%
@@ -22,7 +23,7 @@ font-1 = FontAwesome:style=Regular:size=14;2
 locale = en_US.UTF-8
 
 modules-left = i3
-modules-right = pulseaudio cpu memory filesystem backlight wired-network wireless-network battery date
+modules-right = pulseaudio cpu memory filesystem wired-network date
 
 tray-position = right
 tray-maxsize = 20
@@ -34,40 +35,6 @@ overline-size = 10
 overline-color = ${self.background}
 underline-size = 2
 underline-color = ${self.background}
-
-[module/backlight]
-type = internal/backlight
-format =  <label>
-enable-scroll = true
-
-card =  intel_backlight
-
-label = %percentage%%
-
-[module/battery]
-type = internal/battery
-full-at = 99
-
-format-charging = %{F#ffa900}%{F-} <animation-charging> <label-charging>
-format-discharging = <ramp-capacity> <label-discharging>
-format-full = <ramp-capacity> <label-full>
-
-label-charging = %percentage%%
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-framerate = 750
-
-label-discharging = %percentage%%
-ramp-capacity-0 = 
-ramp-capacity-0-foreground = #f53c3c
-ramp-capacity-1 = 
-ramp-capacity-1-foreground = #ffa900
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
 
 [module/date]
 type = internal/date
@@ -84,26 +51,14 @@ label =  %percentage_used:2%%
 label-foreground = #f4d425
 interval = 0.2
 
-[module/wireless-network]
-type = internal/network
-interface = wlp3s0
-interval = 1
-ping-interval = 10
-
-format-connected = <label-connected>
-label-connected =  %essid% - %local_ip%
-label-connected-foreground = #00a700
-label-disconnected =  not connected
-label-disconnected-foreground = #f53c3c
-
 [module/wired-network]
 type = internal/network
-interface = enp4s0
+interface = enp0s25
 interval = 1
 ping-interval = 10
 
 format-connected = <label-connected>
-label-connected =  %essid% - %local_ip%
+label-connected =  %local_ip%
 label-connected-foreground = #00a700
 label-disconnected =  not connected
 label-disconnected-foreground = #f53c3c
