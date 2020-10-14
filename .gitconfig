@@ -12,3 +12,5 @@
 	submodule = log
 [push]
 	followTags = true
+[pull]
+	rebase = false
