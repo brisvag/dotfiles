@@ -76,6 +76,14 @@ nnoremap <c-g> :call ToggleSpellCheck()<CR>
 nnoremap <c-i> [s
 nnoremap <c-o> ]s
 nnoremap <c-p> zg]s
+" accept local or remote changes with mergetool
+nnoremap <A-,> :diffget LO
+nnoremap <A-.> :diffget RE
+
+
+" OTHER PERSISTENT CHANGES
+
+au BufRead,BufNewFile *.ipy		set filetype=python
 
 
 " PLUGINS
@@ -203,6 +211,8 @@ let g:vimwiki_table_mappings = 0
 nmap <leader>wa :VimwikiAll2HTML<CR><CR>
 nmap <leader>we <Plug>VimwikiSplitLink
 nmap <leader>wq <Plug>VimwikiVSplitLink
+" disable temporary wikis
+let g:vimwiki_global_ext = 0
 
 " NERDTREE
 " open nerdtree

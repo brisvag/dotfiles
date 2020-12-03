@@ -14,3 +14,5 @@
 	followTags = true
 [pull]
 	rebase = false
+[merge]
+	tool = nvimdiff2

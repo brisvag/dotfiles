@@ -144,6 +144,9 @@ bindsym $mod+Shift+z move scratchpad
 bindsym $mod+Tab workspace next
 # close every window on every workspace
 bindsym $mod+Mod1+q [class=".*"] kill
+# create mark on focused window, go to marked window
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+n exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 # APPLICATIONS SHORTCUTS
 
@@ -192,7 +195,7 @@ bindsym XF86AudioPrev exec playerctl previous
 # Brightness controls
 bindsym XF86MonBrightnessDown exec "light -U 5"
 bindsym XF86MonBrightnessUp exec "light -A 5"
-# remember that $mod+n is used by dunst to close all notifications!
+# remember that $mod+Shift+n is used by dunst to close all notifications!
 
 
 # ################ #
