@@ -65,6 +65,10 @@ for_window [class="Ferdi"] move scratchpad
 for_window [class="Ferdi"] scratchpad show, resize set 1400 900, move position center, scratchpad show
 # fix vmd layout on startup
 for_window [title="VMD Main"] floating toggle
+# etomo
+for_window [class="(.*)Etomo(.*)"] floating toggle
+for_window [class="(.*)ETomo(.*)"] floating toggle
+for_window [class="(.*)3dmod(.*)"] floating toggle
 
 
 # ############ #
