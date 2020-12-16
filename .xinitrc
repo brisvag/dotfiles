@@ -1,3 +1,4 @@
 #!/bin/sh
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
 exec i3
-exec /usr/bin/prime-offload
