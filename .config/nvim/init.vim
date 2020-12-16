@@ -77,8 +77,8 @@ nnoremap <c-i> [s
 nnoremap <c-o> ]s
 nnoremap <c-p> zg]s
 " accept local or remote changes with mergetool
-nnoremap <A-,> :diffget LO
-nnoremap <A-.> :diffget RE
+nnoremap <A-,> :diffget LO<CR>
+nnoremap <A-.> :diffget RE<CR>
 
 
 " OTHER PERSISTENT CHANGES

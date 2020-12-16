@@ -12,3 +12,6 @@ venv/
 
 # dotfiles directory
 .dotfiles/
+
+# egg/wheel
+**/*.egg-info/

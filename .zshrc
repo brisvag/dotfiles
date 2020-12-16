@@ -104,7 +104,7 @@ compdef -d mmd # needed to remove conflict of mcd with MultiMarkdown
 unalias gam # otherwise is used for `git am`
 gam () {git add "$1" && git commit -m "$2"} # need quotes on the message
 alias gusup='git branch --set-upstream-to=upstream/$(git_current_branch)'
-
+alias glud='git pull upstream develop'
 
 # TEMPORARY STUFF
 
