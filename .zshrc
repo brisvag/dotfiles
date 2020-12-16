@@ -47,7 +47,6 @@ bindkey "^[[3~" delete-char
 # fzf completion and search
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
-source $HOME/bin/imod/IMOD-linux.sh
 
 # PATHS AND OTHER EXPORTS
 
@@ -69,12 +68,14 @@ export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHO
 
 # basic aliases
 alias sudo='sudo '	# space needed to sudo other aliases
-alias l='ls -lFh --group-directories-first'
-alias la='ls -lFhA --group-directories-first'
-alias lt='ls -lFrth --group-directories-first'
+alias l='exa -lh --git --git-ignore --group-directories-first'
+alias la='l -a'
+alias lt='l -s old'
+alias ltree='l -TI "__pycache__"'
+alias rg='rg -sc'
 alias rm='rm -I'
-alias vi='nvim' #--servername vim'
-alias vim='nvim' #--servername vim'
+alias vi='nvim'
+alias vim='vi'
 alias vimrc='vi $XDG_CONFIG_HOME/nvim/init.vim'
 alias i3conf='vi $XDG_CONFIG_HOME/i3/config'
 alias r='ranger'
@@ -83,7 +84,6 @@ alias diff='diff --color=auto'
 alias :q='exit'
 alias q='exit'
 alias open='xdg-open'
-alias nvrun='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME="nvidia" __VK_LAYER_NV_optimus="NVIDIA_only" '
 mcd () {mkdir -p "$1" && cd "$1"}
 up () {
     yay
