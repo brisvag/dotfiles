@@ -7,7 +7,7 @@
 	process = git-lfs filter-process
 	required = true
 [core]
-	excludesfile = /home/brisvag/.gitignore_global
+	excludesfile = /home/lorenzo/.gitignore_global
 [diff]
 	submodule = log
 [push]
