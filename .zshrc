@@ -74,7 +74,7 @@ source $HOME/bin/imod/IMOD-linux.sh
 
 # basic aliases
 alias sudo='sudo '	# space needed to sudo other aliases
-alias l='exa -lh --git --git-ignore --group-directories-first'
+alias l='exa -lh --git --group-directories-first'
 alias la='l -a'
 alias lt='l -s old'
 alias ltree='l -TI "__pycache__"'
