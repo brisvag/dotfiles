@@ -68,6 +68,7 @@ export PATH="/opt/cuda/bin:$PATH"
 
 # imod
 export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"
+source $HOME/bin/imod/IMOD-linux.sh
 
 # ALIASES AND SIMILAR
 
@@ -105,6 +106,9 @@ unalias gam # otherwise is used for `git am`
 gam () {git add "$1" && git commit -m "$2"} # need quotes on the message
 alias gusup='git branch --set-upstream-to=upstream/$(git_current_branch)'
 alias glud='git pull upstream develop'
+
+# WORK
+alias sbgrid='source /programs/sbgrid.shrc'
 
 # TEMPORARY STUFF
 
