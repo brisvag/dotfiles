@@ -79,6 +79,8 @@ alias la='l -a'
 alias lt='l -s new' 
 alias ltree='l -TI "__pycache__"'
 alias rg='rg -s'
+unalias fd  # in "common aliases", overwrites actual fd
+alias bat='cat'
 alias rm='rm -I'
 alias vi='nvim'
 alias vim='vi'
@@ -92,7 +94,7 @@ alias q='exit'
 alias open='xdg-open'
 mcd () {mkdir -p "$1" && cd "$1"}
 up () {
-    yay
+    yay -Syu --timeupdate --devel
     vi +PlugUpdate +qall
 }
 
