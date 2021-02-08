@@ -80,7 +80,7 @@ alias lt='l -s new'
 alias ltree='l -TI "__pycache__"'
 alias rg='rg -s'
 unalias fd  # in "common aliases", overwrites actual fd
-alias bat='cat'
+alias cat='bat'
 alias rm='rm -I'
 alias vi='nvim'
 alias vim='vi'
