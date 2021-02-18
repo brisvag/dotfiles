@@ -14,14 +14,21 @@ plugins=(
 	colored-man-pages
 	colorize
 	pip
-	python
 	command-not-found
 	archlinux
+    dirhistory
+    extract
+    fzf
+    ripgrep
 	virtualenv
-	web-search
+    jump
 	zsh-autosuggestions
 	zsh-syntax-highlighting
+    systemd
 )
+
+# FZF
+export FZF_DEFAULT_COMMAND='fd'
 
 # initialize some stuff
 source $ZSH/oh-my-zsh.sh
@@ -72,9 +79,8 @@ alias l='exa -lh --git --git-ignore --group-directories-first'
 alias la='l -a'
 alias lt='l -s new' 
 alias ltree='l -TI "__pycache__"'
-alias rg='rg -s'
-unalias fd  # in "common aliases", overwrites actual fd
-alias cat='bat'
+alias rg='rg -S'
+alias cat='bat -p'
 alias rm='rm -I'
 alias vi='nvim'
 alias vim='vi'
@@ -91,10 +97,12 @@ up () {
     yay -Syu --timeupdate --devel
     vi +PlugUpdate +qall
 }
+alias pip_publish='python setup.py sdist bdist_wheel && twine upload dist/*'
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases
 alias dot='GIT_DIR=~/.dotfiles/ GIT_WORK_TREE=~/ '
+alias dotlist='dot git ls-tree --full-tree --name-only -r HEAD'
 
 # git aliases
 compdef -d mmd # needed to remove conflict of mcd with MultiMarkdown
