@@ -15,3 +15,5 @@ venv/
 
 # egg/wheel
 **/*.egg-info/
+build/
+dist/
