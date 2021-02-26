@@ -174,7 +174,7 @@ bindsym $mod+Ctrl+Shift+Right move workspace to output right
 # APPLICATIONS SHORTCUTS
 
 # start a terminal. Open in directory of currently focussed process.
-bindsym $mod+Return exec termite #-d "`xcwd`"
+bindsym $mod+Return exec termite -d "`xcwd`"
 # start rofi (dmenu alternative)
 bindsym $mod+d exec "rofi -show drun -theme ~/.config/rofi/brisvag.rasi"
 # open firefox
