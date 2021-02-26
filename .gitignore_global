@@ -17,3 +17,6 @@ venv/
 **/*.egg-info/
 build/
 dist/
+
+# mergtool backups
+*.orig

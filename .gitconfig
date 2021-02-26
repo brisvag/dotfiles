@@ -1,21 +1,22 @@
 [user]
-	email = brisvag@gmail.com
-	name = Lorenzo Gaifas
+    email = brisvag@gmail.com
+    name = Lorenzo Gaifas
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [core]
 	excludesfile = /home/brisvag/.gitignore_global
-	pager = diff-so-fancy | less --tabs=4 -R
+    pager = diff-so-fancy | less --tabs=4 -R
 [diff]
-	submodule = log
+    submodule = log
 [push]
-	followTags = true
+    followTags = true
 [pull]
-	rebase = false
+    rebase = false
 [merge]
-	tool = nvimdiff2
+    tool = nvimdiff2
 [interactive]
-	diffFilter = diff-so-fancy --patch
+    diffFilter = diff-so-fancy --patch
+

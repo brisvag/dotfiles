@@ -41,55 +41,40 @@ scrollback_lines = 10000
 #scrollbar = off
 
 [colors]
-# If both of these are unset, cursor falls back to the foreground color,
-# and cursor_foreground falls back to the background color.
-#cursor = #dcdccc
-#cursor_foreground = #dcdccc
+# hard contrast: background = #1d2021
+background = #282828
+# soft contrast: background = #32302f
+foreground = #ebdbb2
+foreground_bold = #ebdbb2
 
-#foreground = #D9D9D9
-#foreground_bold = #1F1F1F
+# dark0 + gray
+color0 = #282828
+color8 = #928374
 
-# 20% background transparency (requires a compositor)
-#background = rgba(31, 31, 31, 0.9)
+# neutral_red + bright_red
+color1 = #cc241d
+color9 = #fb4934
 
-# If unset, will reverse foreground and background
-#highlight = #2f2f2f
+# neutral_green + bright_green
+color2 = #98971a
+color10 = #b8bb26
 
-[colors]
-background = rgba(31, 31, 31, 0.85)
-#foreground = rgb(186, 189, 182)
-foreground = rgb(200, 200, 190)
+# neutral_yellow + bright_yellow
+color3 = #d79921
+color11 = #fabd2f
 
-color0  = #2e3436
-color1  = #cc0000
-color2  = #4e9a06
-color3  = #c4a000
-color4  = #25538e
-color5  = #b157bc
-color6  = #12b5b7
-color7  = #97b258
-color8  = #555753
-color9  = #dc3c3c
-color10 = #7cca31
-color11 = #caaf36
-color12 = #3e6aa3
-color13 = #c56cd1
-color14 = #29cdd0
-color15 = #b5c986
-color16 = #787878
-color17 = #ef2929
+# neutral_blue + bright_blue
+color4 = #458588
+color12 = #83a598
 
+# neutral_purple + bright_purple
+color5 = #b16286
+color13 = #d3869b
 
-[hints]
-font = Inconsolata 14
-#foreground = #dcdccc
-#background = #3f3f3f
-#active_foreground = #e68080
-#active_background = #3f3f3f
-#padding = 2
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0
+# neutral_aqua + faded_aqua
+color6 = #689d6a
+color14 = #8ec07c
 
-# vim: ft=dosini cms=#%s
-
+# light4 + light1
+color7 = #a89984
+color15 = #ebdbb2
