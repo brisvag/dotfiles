@@ -209,10 +209,31 @@ map <leader>n :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
+
+" JULIA
+let g:default_julia_version = '1.0'
+" language server
+let g:LanguageClient_serverCommands = {
+\ }
+
+
 " LANGUAGE SERVER
 " Required for operations modifying multiple buffers like rename.
 set hidden
-let g:LanguageClient_serverCommands = { 'python': ['/usr/bin/pyls'] }
+let g:LanguageClient_serverCommands = {
+\   'python': ['/usr/bin/pyls'],
+\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+\       using LanguageServer;
+\       using Pkg;
+\       import StaticLint;
+\       import SymbolServer;
+\       env_path = dirname(Pkg.Types.Context().env.project_file);
+\       
+\       server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
+\       server.runlinter = true;
+\       run(server);
+\   ']
+\ }
 " note that if you are using Plug mapping you should not use `noremap` mappings.
 nmap <F5> <Plug>(lcn-menu)
 nmap <silent> K <Plug>(lcn-hover)
