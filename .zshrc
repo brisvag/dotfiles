@@ -119,6 +119,7 @@ alias glud='git pull upstream develop'
 
 # WORK
 alias sbgrid='source /programs/sbgrid.shrc'
+alias skynosb='ssh -t sky bash --noprofile'
 
 # TEMPORARY STUFF
 
@@ -126,3 +127,5 @@ alias sbgrid='source /programs/sbgrid.shrc'
 export PYTHONPATH="$HOME/git/peepingtom:$PYTHONPATH"
 # aliases
 alias weather='curl -s "v2.wttr.in"'
+
+export JULIA_NUM_THREADS=32
