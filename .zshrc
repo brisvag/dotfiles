@@ -121,6 +121,8 @@ alias gruh='git reset upstream/$(git_current_branch) --hard'
 # WORK
 alias sbgrid='source /programs/sbgrid.shrc'
 alias skynosb='ssh -t sky bash --noprofile'
+alias sq='ssh -t sky watch squeue'
+alias chimerax='~/build/chimerax-1.1/bin/ChimeraX'
 
 # TEMPORARY STUFF
 
