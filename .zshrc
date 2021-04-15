@@ -100,7 +100,7 @@ alias q='exit'
 alias open='xdg-open'
 mcd () {mkdir -p "$1" && cd "$1"}
 up () {
-    yay -Syu --timeupdate --devel
+    yay -Syu --timeupdate --devel --editmenu
     vi +PlugUpdate +qall
 }
 alias pip_publish='python setup.py sdist bdist_wheel && twine upload dist/*'
@@ -116,6 +116,7 @@ unalias gam # otherwise is used for `git am`
 gam () {git add "$1" && git commit -m "$2"} # need quotes on the message
 alias gusup='git branch --set-upstream-to=upstream/$(git_current_branch)'
 alias glud='git pull upstream develop'
+alias gruh='git reset upstream/$(git_current_branch) --hard'
 
 # WORK
 alias sbgrid='source /programs/sbgrid.shrc'

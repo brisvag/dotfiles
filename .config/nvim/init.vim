@@ -31,24 +31,7 @@ nnoremap <esc>^[ <esc>^[
 " set vim to use systemclipboard
 set clipboard+=unnamedplus
 " change working directory to current file automatically
-set autochdir
-
-" automatically close vim if nerdtree/vista is the only thing left
-function CloseIfOnlyNerdtreeOrVista()
-    if tabpagenr('$') == 1
-        let count = 0
-        if bufexists('NERD_tree_1')
-            let count += 1
-        endif
-        if bufexists('__vista__')
-            let count += 1
-        endif
-        if count == winnr('$')
-            qall
-        endif
-    endif
-endfunction
-autocmd BufEnter * nested call CloseIfOnlyNerdtreeOrVista()
+"set autochdir
 
 
 " GENERAL MAPPINGS
@@ -161,6 +144,9 @@ smap <Space><Space>     <Plug>(neosnippet_expand_or_jump)
 xmap <Space><Space>     <Plug>(neosnippet_expand_target)
 let g:neosnippet#snippets_directory="${XDG_DATA_HOME}/nvim/custom/snippets"
 
+" AUTOPAIR
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
 " VIMTEX and latex-related
 " Enable latex filetype even for empty .tex files
 let g:tex_flavor='latex'
@@ -209,13 +195,8 @@ map <leader>n :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
-
 " JULIA
 let g:default_julia_version = '1.0'
-" language server
-let g:LanguageClient_serverCommands = {
-\ }
-
 
 " LANGUAGE SERVER
 " Required for operations modifying multiple buffers like rename.
@@ -234,9 +215,12 @@ let g:LanguageClient_serverCommands = {
 \       run(server);
 \   ']
 \ }
-" note that if you are using Plug mapping you should not use `noremap` mappings.
-nmap <F5> <Plug>(lcn-menu)
+" note that if you are using Plug mapping you should NOT use `noremap` mappings.
+nmap <silent> <F5> <Plug>(lcn-menu)
 nmap <silent> K <Plug>(lcn-hover)
 nmap <silent> <leader>gd <Plug>(lcn-definition)
 nmap <silent> <leader>gr <Plug>(lcn-references)
 nmap <silent> <leader>rn <Plug>(lcn-rename)
+
+" FZF
+nnoremap <leader>f :FZF<CR>
