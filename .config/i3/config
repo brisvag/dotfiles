@@ -69,6 +69,8 @@ for_window [title="VMD Main"] floating toggle
 for_window [class="(.*)Etomo(.*)"] floating toggle
 for_window [class="(.*)ETomo(.*)"] floating toggle
 for_window [class="(.*)3dmod(.*)"] floating toggle
+# chimera
+for_window [class="Toplevel"] floating toggle
 
 
 # ############ #
@@ -237,6 +239,8 @@ exec --no-startup-id /usr/bin/lxqt-policykit-agent
 exec --no-startup-id nm-applet
 # pulseaudio
 exec --no-startup-id start-pulseaudio-x11
+# bluetooth
+exec --no-startup-id blueman-applet
 # notification manager
 exec --no-startup-id dunst -conf .config/dunst/dunstrc
 # composite manager for transparency and other improvements
