@@ -174,7 +174,7 @@ bindsym --release $mod+p exec "import ~/pictures/i3screenshot.png && xclip -sele
 # restart i3 inplace
 bindsym $mod+Shift+c restart
 # lock screen with fancy blur, disabling dunst in the meantime
-bindsym $mod+Shift+b exec "notify-send \\"DUNST_COMMAND_PAUSE\\"; i3lock-fancy-rapid 7 4 -n; notify-send \\"DUNST_COMMAND_RESUME\\""
+bindsym $mod+Shift+b exec "dunstctl set-paused true; i3lock-fancy-rapid 7 4 -n; dunstctl set-paused false"
 # logout
 bindsym $mod+Shift+t exec i3-msg exit
 # reboot
