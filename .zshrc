@@ -124,11 +124,18 @@ alias skynosb='ssh -t sky bash --noprofile'
 alias sq='ssh -t sky watch squeue'
 alias chimera='/opt/ucsf-chimera/bin/chimera'
 alias chimerax='~/build/chimerax-1.1/bin/ChimeraX'
+dynamo () {
+    export CUDA_PATH=/opt/cuda8
+    export CUDA_ROOT=/opt/cuda8
+    export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
+    tmp=`pwd`
+    cd "$HOME/build/dynamo/11514"
+    source dynamo_activate_linux_shipped_MCR.sh
+    cd $tmp
+}
 
 # TEMPORARY STUFF
 
-# exports
-export PYTHONPATH="$HOME/git/peepingtom:$PYTHONPATH"
 # aliases
 alias weather='curl -s "v2.wttr.in"'
 
