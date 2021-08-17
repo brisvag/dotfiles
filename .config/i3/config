@@ -41,7 +41,7 @@ for_window [class="^.*"] title_format "<span font_weight='heavy'>%title</span>"
 # this is the thin space charachter used before and after icons: " "
 # icons for specific title bars
 for_window [class="(.*)firefox(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
-for_window [class="(.*)Termite(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
+for_window [class="(.*)Alacritty(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
 for_window [class="(.*)Chromium(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
 for_window [class="(.*)jetbrains-pycharm(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
 
@@ -151,7 +151,7 @@ bindsym $mod+n exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 # APPLICATIONS SHORTCUTS
 
 # start a terminal. Open in directory of currently focussed process.
-bindsym $mod+Return exec termite -d "`xcwd`"
+bindsym $mod+Return exec alacritty -d "`xcwd`"
 # start rofi (dmenu alternative)
 bindsym $mod+d exec "rofi -show drun -theme ~/.config/rofi/brisvag.rasi"
 # open firefox
@@ -163,7 +163,7 @@ bindsym $mod+x exec "firefox -private-window"
 # open spotify using mod+play
 bindsym $mod+XF86AudioPlay exec spotify
 # open ranger (file mamager)
-bindsym $mod+r exec termite -e ranger "`xcwd`"
+bindsym $mod+r exec alacritty -e ranger "`xcwd`"
 # take a screenshot using the import command from imagemagick and xclip to copy to clipboard
 bindsym --release $mod+p exec "import ~/pictures/i3screenshot.png && xclip -selection clipboard -target image/png ~/pictures/i3screenshot.png"
 
@@ -218,8 +218,8 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id dunst -conf .config/dunst/dunstrc
 # composite manager for transparency and other improvements
 exec --no-startup-id picom --config ~/.config/picom.conf --experimental-backends --blur-method dual_kawase --blur-strength 3 -b
-# restore nitrogen to set the desktop wallpaper (the first time you have to run nitrogen to set your wallpaper)
-exec --no-startup-id nitrogen --restore
+# desktop wallpaper
+#exec --no-startup-id feh --bg-fill ...
 # set as default the us keyboard layout
 exec --no-startup-id setxkbmap -layout us
 # unclutter (auto-hide cursor)
