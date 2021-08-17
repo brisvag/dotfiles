@@ -151,7 +151,7 @@ bindsym $mod+n exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 # APPLICATIONS SHORTCUTS
 
 # start a terminal. Open in directory of currently focussed process.
-bindsym $mod+Return exec alacritty -d "`xcwd`"
+bindsym $mod+Return exec alacritty --working-directory "`xcwd`"
 # start rofi (dmenu alternative)
 bindsym $mod+d exec "rofi -show drun -theme ~/.config/rofi/brisvag.rasi"
 # open firefox
