@@ -92,6 +92,7 @@ alias diff='diff --color=auto'
 alias :q='exit'
 alias q='exit'
 alias open='xdg-open'
+alias feh='feh -d.'
 mcd () {mkdir -p "$1" && cd "$1"}
 up () {
     yay -Syu --timeupdate --devel --editmenu
