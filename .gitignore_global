@@ -20,3 +20,6 @@ dist/
 
 # mergtool backups
 *.orig
+
+# hypothesis testing
+.hypothesis/

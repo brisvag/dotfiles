@@ -97,6 +97,7 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'kkoomen/vim-doge'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'lervag/vimtex'
 call plug#end()
 
 
