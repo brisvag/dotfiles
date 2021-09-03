@@ -9,7 +9,7 @@ font:
   bold_italic:
     style: Bold Italic
 
-  size: 14.0
+  size: 10.0
 
 colors:
   primary:
