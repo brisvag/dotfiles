@@ -14,6 +14,10 @@ configuration {
 	urgent-bg-color:		#900000EE;
 	urgent-text-color:		#FFFFFFFF;
 }
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
 window {
 	background-color:	@inactive-bg-color;
 	border-color:		@active-border-color;
