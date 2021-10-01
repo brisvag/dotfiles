@@ -1,8 +1,5 @@
 " BEHAVIOUR
 
-" Set 'nocompatible' to ward off unexpected things that your distro might
-" have made, as well as sanely reset options when re-sourcing .vimrc
-set nocompatible
 " Non-retarded splitting (bottom-right instead of the opposite)
 set splitbelow splitright
 " Use case insensitive search, except when using capital letters
@@ -21,7 +18,6 @@ set mouse=a
 " Indentation settings for using hard tabs for indent. Display tabs as
 " four characters wide
 set expandtab
-set autoindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -30,8 +26,17 @@ nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 " set vim to use systemclipboard
 set clipboard+=unnamedplus
-" change working directory to current file automatically
-"set autochdir
+" indent wrapped text as original line
+set breakindent 
+" save undo history
+set undofile
+" Set the command window height to 2 lines, to avoid many cases of having to
+" "press <Enter> to continue"
+set cmdheight=2
+" Display line numbers on the left
+set number
+" Show context lines before and after the cursor
+set so=10
 
 
 " GENERAL MAPPINGS
@@ -76,13 +81,6 @@ set termguicolors
 set background=dark
 let g:gruvbox_italics=1
 colorscheme gruvbox
-" Set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
-set cmdheight=2
-" Display line numbers on the left
-set number
-" Show context lines before and after the cursor
-set so=10
 
 
 " PLUGINS
@@ -97,11 +95,13 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'kkoomen/vim-doge'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+"Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'lervag/vimtex'
 call plug#end()
 
 
 " PLUGIN SETTINGS
+"
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
 " close atuomatically on completion
@@ -199,29 +199,58 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " JULIA
 let g:default_julia_version = '1.0'
 
-" LANGUAGE SERVER
-" Required for operations modifying multiple buffers like rename.
-set hidden
-let g:LanguageClient_serverCommands = {
-\   'python': ['/usr/bin/pyls'],
-\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-\       using LanguageServer;
-\       using Pkg;
-\       import StaticLint;
-\       import SymbolServer;
-\       env_path = dirname(Pkg.Types.Context().env.project_file);
-\       
-\       server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
-\       server.runlinter = true;
-\       run(server);
-\   ']
-\ }
-" note that if you are using Plug mapping you should NOT use `noremap` mappings.
-nmap <silent> <F5> <Plug>(lcn-menu)
-nmap <silent> K <Plug>(lcn-hover)
-nmap <silent> <leader>gd <Plug>(lcn-definition)
-nmap <silent> <leader>gr <Plug>(lcn-references)
-nmap <silent> <leader>rn <Plug>(lcn-rename)
-
 " FZF
 nnoremap <leader>f :FZF<CR>
+
+" LANGUAGE SERVER
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pylsp', 'pyright', 'julials' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+require'lspconfig'.pylsp.setup{}
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.julials.setup{}
+EOF
