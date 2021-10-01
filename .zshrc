@@ -103,6 +103,7 @@ mcd () {mkdir -p "$1" && cd "$1"}
 up () {
     yay -Syu --timeupdate --devel --editmenu
     vi +PlugUpdate +qall
+    echo "Don't forget to update julia nvim-lspconfig sometimes!"
 }
 alias pip_publish='python setup.py sdist bdist_wheel && twine upload dist/*'
 alias rsync_all='rsync -avztuHAXP'
