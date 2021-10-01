@@ -100,6 +100,7 @@ up () {
     echo "Don't forget to update julia nvim-lspconfig sometimes!"
 }
 alias pip_publish='python setup.py sdist bdist_wheel && twine upload dist/*'
+alias rsync_all='rsync -avztuHAXP'
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases
@@ -113,6 +114,7 @@ gam () {git add "$1" && git commit -m "$2"} # need quotes on the message
 alias gusup='git branch --set-upstream-to=upstream/$(git_current_branch)'
 alias glud='git pull upstream develop'
 alias gruh='git reset upstream/$(git_current_branch) --hard'
+graa () {git remote add "$1" "git@github.com:$1/$(git_repo_name).git"}
 
 
 # TEMPORARY STUFF
