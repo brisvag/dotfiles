@@ -255,3 +255,4 @@ x-scheme-handler/ferdi=ferdi.desktop
 [Added Associations]
 text/plain=nvim.desktop;
 application/pdf=okularApplication_pdf.desktop;
+binary/octet-stream=okularApplication_chm.desktop;
