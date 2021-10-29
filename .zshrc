@@ -126,7 +126,20 @@ grao () {git remote add origin git@github.com:brisvag/$(git_repo_name).git}
 # WORK
 alias sbgrid='source /programs/sbgrid.shrc'
 alias skynosb='ssh -t sky bash --noprofile'
-alias sq='ssh -t sky watch squeue'
+alias sq='ssh -t sky /bin/bash -ic "sq"'
+sqgpu () {
+    ssh em -qt 'squeue -t R -o "%.16R %.6b"' | awk '{
+            gpu=substr($1,4,1);
+            count[gpu]=count[gpu]+substr($2,5,1);
+        }
+        END{
+            a=1;
+            while(a<=8){
+                if(a<=6){b=4}else{b=8};
+                print "Gpu " a " has " b-count[a] " free gpus.";a++}
+        }'
+}
+
 alias chimera='/opt/ucsf-chimera/bin/chimera'
 alias chimerax='~/build/chimerax-1.1/bin/ChimeraX'
 dynamo () {
