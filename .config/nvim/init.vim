@@ -123,6 +123,7 @@ Plug 'Shougo/neosnippet-snippets'
 "Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'lervag/vimtex'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'preservim/vim-pencil'
 call plug#end()
 
 
@@ -318,3 +319,13 @@ nnoremap <leader>fz <cmd>Telescope current_buffer_fuzzy_find<cr>
 lua <<EOF
     require('telescope').load_extension('fzf')
 EOF
+
+
+" PENCIL
+let g:pencil#wrapModeDefault = 'soft'
+augroup pencil
+    autocmd!
+    autocmd FileType markdown,mkd call pencil#init()
+    autocmd FileType text call pencil#init()
+    autocmd FileType tex call pencil#init()
+augroup END
