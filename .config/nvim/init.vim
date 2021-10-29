@@ -37,6 +37,8 @@ set cmdheight=2
 set number
 " Show context lines before and after the cursor
 set so=10
+" allow buffers to be hidden without asking to save yet
+set hidden
 
 
 " GENERAL MAPPINGS
