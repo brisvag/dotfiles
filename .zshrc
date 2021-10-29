@@ -115,6 +115,7 @@ alias gusup='git branch --set-upstream-to=upstream/$(git_current_branch)'
 alias glud='git pull upstream develop'
 alias gruh='git reset upstream/$(git_current_branch) --hard'
 graa () {git remote add "$1" "git@github.com:$1/$(git_repo_name).git"}
+grao () {git remote add origin git@github.com:brisvag/$(git_repo_name).git}
 
 
 # TEMPORARY STUFF
