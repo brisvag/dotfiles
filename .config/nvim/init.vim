@@ -39,6 +39,9 @@ set number
 set so=10
 " allow buffers to be hidden without asking to save yet
 set hidden
+" trigger `autoread` when files changes on disk
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 
 
 " GENERAL MAPPINGS
@@ -86,12 +89,32 @@ colorscheme gruvbox
 
 
 " PLUGINS
-
+"   deoplete
+"   lightline
+"   lspconfig
+"   remote
+"   targets-opt
+"   vista
+"   pynvim
+"   auto-pairs
+"   fastfold
+"   fugitive
+"   gitgutter
+"   gruvbox
+"   julia
+"   molokai
+"   nerdcommenter
+"   nerdtree
+"   repeat
+"   surround
+"   unimpaired
+"   vimtex
+"   vimwiki
+"   treesitter (with various language packs)
+"   telescope
 call plug#begin("$XDG_DATA_HOME/nvim/plugged")
 Plug 'lilydjwg/colorizer'
 " broken atm Plug 'scrooloose/nerdtree-git-plugin'
-" local fzf
-Plug '/usr/bin/fzf'
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'tmhedberg/SimpylFold'
 Plug 'kkoomen/vim-doge'
@@ -99,6 +122,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 "Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'lervag/vimtex'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 call plug#end()
 
 
@@ -152,12 +176,19 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " VIMTEX and latex-related
 " Enable latex filetype even for empty .tex files
-let g:tex_flavor='latex'
-" Vim-latex live preview
-let g:livepreview_previewer = 'mupdf'
-let g:vimtex_view_method = 'mupdf'
-" folding
+let g:tex_flavor='latexmk'
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
+let g:vimtex_quickfix_mode=0
 let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_types = {
+           \ 'preamble' : {'enabled' : 1},
+           \ 'sections' : {'enabled' : 1},
+           \ 'envs' : {
+           \   'blacklist' : ['figures'],
+           \ },
+           \}
 
 " SEMSHI
 let g:semshi#update_delay_factor = 0.0001
@@ -201,9 +232,6 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " JULIA
 let g:default_julia_version = '1.0'
 
-" FZF
-nnoremap <leader>f :FZF<CR>
-
 " LANGUAGE SERVER
 lua << EOF
 local nvim_lsp = require('lspconfig')
@@ -237,7 +265,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  -- conflict with fzf buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  -- conflict with finder buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 end
 
@@ -252,4 +280,41 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+EOF
+
+
+" TREESITTER
+" highlight
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+" folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+
+" TELESCOPE
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fz <cmd>Telescope current_buffer_fuzzy_find<cr>
+lua <<EOF
+    require('telescope').load_extension('fzf')
 EOF

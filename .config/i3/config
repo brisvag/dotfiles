@@ -248,7 +248,7 @@ exec --no-startup-id dunst -conf .config/dunst/dunstrc
 # composite manager for transparency and other improvements
 exec --no-startup-id picom --config ~/.config/picom.conf --experimental-backends --blur-method dual_kawase --blur-strength 3 -b
 # desktop wallpaper
-#exec --no-startup-id feh --bg-fill ...
+exec --no-startup-id feh --bg-fill ~/pictures/wallpaper.png
 # set as default the us keyboard layout
 exec --no-startup-id setxkbmap -layout us
 # unclutter (auto-hide cursor)
