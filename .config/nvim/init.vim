@@ -182,7 +182,7 @@ let g:tex_flavor='latexmk'
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
-let g:vimtex_quickfix_mode=0
+let g:vimtex_quickfix_mode=2
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = {
            \ 'preamble' : {'enabled' : 1},
