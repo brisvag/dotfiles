@@ -123,6 +123,7 @@ Plug 'Shougo/neosnippet-snippets'
 "Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'lervag/vimtex'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'ElPiloto/telescope-vimwiki.nvim'
 Plug 'preservim/vim-pencil'
 call plug#end()
 
@@ -203,19 +204,41 @@ let g:SimpylFold_fold_docstring = 0
 let g:colorizer_maxlines = 1000
 
 " VIMWIKI
-let g:vimwiki_list = [
-						\{
-						\'path': '~/git/wiki',
-						\'path_html': '~/git/wiki/html/',
-						\'syntax': 'markdown',
-						\'ext': '.md',
-						\'template_path': '~/git/wiki/templates',
-						\'template_default': 'default',
-						\'template_ext': '.html',
-						\'auto_tags': 1,
-						\'auto_diary_index': 1,
-						\},
-					\]
+let wiki_main = {}
+let wiki_main.path = '~/git/wiki'
+let wiki_main.path_html = '~/git/wiki/html/'
+let wiki_main.syntax = 'markdown'
+let wiki_main.ext = '.md'
+let wiki_main.template_path = '~/git/wiki/templates'
+let wiki_main.template_default = 'default'
+let wiki_main.template_ext = '.html'
+let wiki_main.auto_tags = 1
+let wiki_main.auto_diary_index = 1
+
+let wiki_lim_baraan = {}
+let wiki_lim_baraan.path = '~/git/lim-baraan-wiki/'
+let wiki_lim_baraan.path_html = '~/git/lim-baraan-wiki/html/'
+let wiki_lim_baraan.syntax = 'default'
+let wiki_lim_baraan.ext = '.wiki'
+let wiki_lim_baraan.template_path = '~/git/lim-baraan-wiki/templates'
+let wiki_lim_baraan.template_default = 'default'
+let wiki_lim_baraan.template_ext = '.html'
+let wiki_lim_baraan.auto_tags = 1
+let wiki_lim_baraan.auto_diary_index = 1
+
+let dndwiki = {}
+let dndwiki.path = '~/git/dndwiki/'
+let dndwiki.path_html = '~/git/dndwiki/html/'
+let dndwiki.syntax = 'markdown'
+let dndwiki.ext = '.md'
+let dndwiki.template_path = '~/git/dndwiki/templates'
+let dndwiki.template_default = 'default'
+let dndwiki.template_ext = '.html'
+let dndwiki.auto_tags = 1
+let dndwiki.auto_diary_index = 1
+
+let g:vimwiki_list = [wiki_main, wiki_lim_baraan, dndwiki]
+
 let g:vimwiki_table_mappings = 0
 nmap <leader>wa :VimwikiAll2HTML<CR><CR>
 nmap <leader>we <Plug>VimwikiSplitLink
@@ -316,8 +339,10 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fz <cmd>Telescope current_buffer_fuzzy_find<cr>
+nnoremap <leader>fw <cmd>Telescope vimwiki<cr>
 lua <<EOF
     require('telescope').load_extension('fzf')
+    require('telescope').load_extension('vimwiki')
 EOF
 
 
