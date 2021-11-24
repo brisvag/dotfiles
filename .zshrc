@@ -80,6 +80,9 @@ source $HOME/bin/imod/IMOD-linux.sh
 # python
 export PYTHONBREAKPOINT="pudb.set_trace"
 
+# python
+export PYTHONBREAKPOINT="pudb.set_trace"
+
 # ALIASES AND SIMILAR
 
 # basic aliases
