@@ -110,7 +110,6 @@ colorscheme gruvbox
 "   unimpaired
 "   vimtex
 "   vimwiki
-"   treesitter (with various language packs)
 "   telescope
 call plug#begin("$XDG_DATA_HOME/nvim/plugged")
 Plug 'lilydjwg/colorizer'
@@ -191,6 +190,9 @@ let g:vimtex_fold_types = {
            \   'blacklist' : ['figures'],
            \ },
            \}
+let g:vimtex_compiler_latexmk_engines = {
+    \ '_': '-pdf -shell-escape',
+    \}
 
 " SEMSHI
 let g:semshi#update_delay_factor = 0.0001
@@ -305,31 +307,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
-
-
-" TREESITTER
-" highlight
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
-
-" folding
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 
 
 " TELESCOPE

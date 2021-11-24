@@ -71,6 +71,7 @@ for_window [class="(.*)ETomo(.*)"] floating toggle
 for_window [class="(.*)3dmod(.*)"] floating toggle
 # chimera
 for_window [class="Toplevel"] floating toggle
+for_window [title="VisPy canvas"] floating toggle
 
 
 # ############ #
