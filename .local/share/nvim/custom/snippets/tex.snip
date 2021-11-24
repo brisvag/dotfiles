@@ -19,6 +19,7 @@ alias   \subfigures
         \caption{${8}}
         \label{${9}}
 	\end{figure}
+    ${0}
 
 snippet includegraphics
 alias   \includegraphics graph \graph
@@ -34,3 +35,15 @@ alias beamercolumns splitslide
                 ${3}
         \end{columns}
     \end{frame}
+    ${0}
+
+snippet verb
+    \verb|${1}|${0}
+
+snippet python
+    \begin[python]{minted}
+        ${1:TARGET}
+    \end{minted}
+
+snippet href
+    \href{${1:TARGET}}{${2}}${0}

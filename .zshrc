@@ -71,6 +71,9 @@ export FREEMOL="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol"
 export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHONPATH"
 
 
+# python
+export PYTHONBREAKPOINT="pudb.set_trace"
+
 # ALIASES AND SIMILAR
 
 # basic aliases
@@ -114,6 +117,7 @@ gam () {git add "$1" && git commit -m "$2"} # need quotes on the message
 alias gusup='git branch --set-upstream-to=upstream/$(git_current_branch)'
 alias glud='git pull upstream develop'
 alias gruh='git reset upstream/$(git_current_branch) --hard'
+alias gdum='git diff upstream/main'
 graa () {git remote add "$1" "git@github.com:$1/$(git_repo_name).git"}
 grao () {git remote add origin git@github.com:brisvag/$(git_repo_name).git}
 gclo () {git clone git@github.com:brisvag/$1.git}

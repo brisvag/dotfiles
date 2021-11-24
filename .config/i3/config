@@ -54,6 +54,7 @@ for_window [class="Ferdi"] move scratchpad
 for_window [class="Ferdi"] resize set 1400 900, move absolute position center
 # fix vmd layout on startup
 for_window [title="VMD Main"] floating toggle
+for_window [title="VisPy canvas"] floating toggle
 
 
 # ############ #
