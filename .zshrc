@@ -72,8 +72,12 @@ export PATH="$HOME/scripts:$PATH"
 export FREEMOL="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol"
 export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHONPATH"
 
-# python
-export PYTHONBREAKPOINT="pudb.set_trace"
+# cuda
+export PATH="/opt/cuda/bin:$PATH"
+
+# imod
+export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"
+source $HOME/bin/imod/IMOD-linux.sh
 
 # ALIASES AND SIMILAR
 
