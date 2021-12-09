@@ -79,12 +79,6 @@ export PATH="/opt/cuda/bin:$PATH"
 export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"
 source $HOME/bin/imod/IMOD-linux.sh
 
-# python
-export PYTHONBREAKPOINT="pudb.set_trace"
-
-# python
-export PYTHONBREAKPOINT="pudb.set_trace"
-
 # ALIASES AND SIMILAR
 
 # basic aliases
@@ -161,10 +155,5 @@ dynamo () {
     source dynamo_activate_linux_shipped_MCR.sh
     cd $tmp
 }
-
-# TEMPORARY STUFF
-
-# aliases
-alias weather='curl -s "v2.wttr.in"'
 
 export JULIA_NUM_THREADS=32
