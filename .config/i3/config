@@ -8,9 +8,7 @@
 set $mod Mod4
 
 # APPEARANCE
-
-# font for windows and terminals
-font pango:inconsolata bold 14
+font pango:InconsolataGo Nerd Font Mono bold 14
 # colors
 set $bg_act		    #505050
 set $text_act	    #FFFFFF
@@ -205,8 +203,6 @@ bindsym XF86MonBrightnessUp exec "light -A 5"
 
 # start polybar
 exec --no-startup-id ~/.config/polybar/launch.sh
-# fix dpi
-exec --no-startup-id xrandr --dpi 75
 # policykit agent
 exec --no-startup-id /usr/bin/lxqt-policykit-agent
 # network manager applet

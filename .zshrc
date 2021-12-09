@@ -8,22 +8,22 @@ ZSH_THEME="bira_venvfix"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-	common-aliases
-	git
+    common-aliases
+    git
     git-auto-fetch
-	colored-man-pages
-	colorize
-	pip
-	command-not-found
-	archlinux
+    colored-man-pages
+    colorize
+    pip
+    command-not-found
+    archlinux
     dirhistory
     extract
     fzf
     ripgrep
-	virtualenv
+    virtualenv
     jump
-	zsh-autosuggestions
-	zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-syntax-highlighting
     systemd
 )
 
@@ -45,6 +45,8 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
 
+# Colorscheme
+$HOME/build/theme.sh/bin/theme.sh gruvbox-dark
 
 # SOURCES
 
@@ -69,7 +71,6 @@ export PATH="$HOME/scripts:$PATH"
 # pymol
 export FREEMOL="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol"
 export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHONPATH"
-
 
 # python
 export PYTHONBREAKPOINT="pudb.set_trace"
@@ -121,11 +122,3 @@ alias gdum='git diff upstream/main'
 graa () {git remote add "$1" "git@github.com:$1/$(git_repo_name).git"}
 grao () {git remote add origin git@github.com:brisvag/$(git_repo_name).git}
 gclo () {git clone git@github.com:brisvag/$1.git}
-
-
-# TEMPORARY STUFF
-
-# exports
-export PYTHONPATH="$HOME/git/peepingtom:$PYTHONPATH"
-# aliases
-alias weather='curl -s "v2.wttr.in"'

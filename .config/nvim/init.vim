@@ -1,56 +1,65 @@
 " BEHAVIOUR
 
-" Non-retarded splitting (bottom-right instead of the opposite)
 set splitbelow splitright
-" Use case insensitive search, except when using capital letters
 set ignorecase smartcase
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
 set confirm
-" Use visual bell instead of beeping when doing something wrong
-" And reset the terminal code for the visual bell. If visualbell is set, and
-" this line is also included, vim will neither flash nor beep. If visualbell
-" is unset, this does nothing.
 set visualbell
-set t_vb= 
-" Enable use of the mouse for all mode. Press shift to highlight normally!
-set mouse=a
-" Indentation settings for using hard tabs for indent. Display tabs as
-" four characters wide
 set expandtab
-set tabstop=4
-set softtabstop=4
 set shiftwidth=4
-" clear last search highlight by pressing ESC in normal mode
-nnoremap <esc> :noh<return><esc>
-nnoremap <esc>^[ <esc>^[
-" set vim to use systemclipboard
-set clipboard+=unnamedplus
-" indent wrapped text as original line
+set tabstop=4
+set softtabstop=-1
+set mouse=a
+set clipboard=unnamedplus
 set breakindent 
-" save undo history
 set undofile
-" Set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
 set cmdheight=2
-" Display line numbers on the left
 set number
-" Show context lines before and after the cursor
-set so=10
-" allow buffers to be hidden without asking to save yet
+set scrolloff=8
+set sidescrolloff=8
 set hidden
-" trigger `autoread` when files changes on disk
 set autoread
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+set termguicolors
+set title
+set wildmode=longest:full,full
+set list
+set listchars=tab:▸\ ,trail:·
+set nojoinspaces
+set updatetime=300 " Reduce time for highlighting other references
+set redrawtime=10000 " Allow more time for loading syntax on large files
+set completeopt=menu,menuone,noselect
+set noshowmode
+
+colorscheme gruvbox
+let g:gruvbox_italics=1
+
+au BufRead,BufNewFile *.ipy set filetype=python
+" Automatically reload file when entering buffer or gaining focus
+au FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 
 
 " GENERAL MAPPINGS
 
-" Split tabs navigation shorcuts
+" Split tabs navigation shortcuts
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+" Reselect visual selection after indenting
+vnoremap < <gv
+vnoremap > >gv
+" Maintain the cursor position when yanking/joining a visual selection
+" works by putting markers and jumping back to them
+" http://ddrscott.github.io/blog/2016/yank-without-jank/
+vnoremap y myy`y
+vnoremap Y myY`y
+vnoremap J mjJ`j
+" Paste replace visual selection without copying it
+vnoremap <leader>p "_dP
+" Center search and open folds if needed
+nnoremap n nzzzv
+nnoremap N Nzzzv
+" Quick escape
+imap jj <esc>
 " space to open/close a fold and Ctrl space to do toggle all folding
 nnoremap <space> za
 nnoremap <expr> <C-space> &foldlevel ? 'zM' :'zR'
@@ -65,73 +74,74 @@ function ToggleSpellCheck()
         let b:spell_toggled=0
     endif
 endfunction
-nnoremap <c-g> :call ToggleSpellCheck()<CR>
-" navigate spellchecks or add to dictionary
-nnoremap <leader>i [s
-nnoremap <leader>o ]s
-nnoremap <c-p> zg]s
+nnoremap <c-g> :call ToggleSpellCheck()<cr>
 " accept local or remote changes with mergetool
 nnoremap <A-,> :diffget LO
 nnoremap <A-.> :diffget RE
 
 
-" OTHER PERSISTENT CHANGES
-
-au BufRead,BufNewFile *.ipy		set filetype=python
-
-
-" APPEARANCE
-
-set termguicolors
-set background=dark
-let g:gruvbox_italics=1
-colorscheme gruvbox
-
-
 " PLUGINS
-"   deoplete
-"   lightline
-"   lspconfig
-"   remote
-"   targets-opt
-"   vista
-"   pynvim
+" Automatically install vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Installed via arch packages
 "   auto-pairs
+"   deoplete
 "   fastfold
 "   fugitive
 "   gitgutter
 "   gruvbox
 "   julia
-"   molokai
+"   lastplace
+"   lspconfig
+"   lualine (requires InconsolataGo nerd font)
 "   nerdcommenter
 "   nerdtree
+"   pynvim
+"   remote
 "   repeat
+"   splitjoin
 "   surround
+"   targets(-opt)
+"   telescope
+"   treesitter (and relative languages)
+"   trouble
 "   unimpaired
+"   vim-which-key
 "   vimtex
 "   vimwiki
-"   telescope
+"   vista
+"   visual-multi
+"   hexokinase
 call plug#begin("$XDG_DATA_HOME/nvim/plugged")
-Plug 'lilydjwg/colorizer'
-" broken atm Plug 'scrooloose/nerdtree-git-plugin'
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tmhedberg/SimpylFold'
 Plug 'kkoomen/vim-doge'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-"Plug 'deoplete-plugins/deoplete-lsp'
+Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'lervag/vimtex'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'ElPiloto/telescope-vimwiki.nvim'
 Plug 'preservim/vim-pencil'
+"Plug 'pierreglaser/folding-nvim' # currently broken, for now using simpylfold
+Plug 'tommcdo/vim-exchange'
+Plug 'sickill/vim-pasta'
+Plug 'airblade/vim-rooter'
+Plug 'vim-test/vim-test'
+Plug 'bronson/vim-visual-star-search'
 call plug#end()
 
 
 " PLUGIN SETTINGS
-"
+
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
-" close atuomatically on completion
+" close automatically on completion
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 " enable completion with latex
 call deoplete#custom#var('omni', 'input_patterns', {'tex': g:vimtex#re#deoplete})
@@ -140,36 +150,39 @@ inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<s-tab>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 
 " VISTA
-nnoremap <leader>v :Vista!!<CR>
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+nnoremap <leader>v :Vista!!<cr>
 let g:vista_stay_on_open = 0
-" function for lightline
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunctio
-" need this line to automatically run the vista function on startup
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+let g:vista_default_executive = 'nvim_lsp'
 
-" LIGHTLINE
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ 'active': {
-      \   'left': [ [ 'mode' ],
-      \             [ 'readonly', 'filename', 'modified', 'method' ] ],
-      \   'right': [ [ 'percent', 'lineinfo' ],
-      \             [ 'lintstatus' ] ],
-      \ },
-      \ 'component_function': {
- 	  \   'method': 'NearestMethodOrFunction',
-      \ },
-      \ }
-" hide mode, since lightline is taking care of that now
-set noshowmode
+" LUALINE
+lua << EOF
+require('lualine').setup {
+    options = {
+        theme = 'gruvbox_dark',
+        sections = {
+            lualine_a = {'mode'},
+            lualine_b = {'branch', 'diff', {'diagnostics', sources={'nvim_lsp'}}},
+            lualine_c = {'filename'},
+            lualine_x = {'buffers'},
+            lualine_y = {'progress'},
+            lualine_z = {'location'}
+        },
+        inactive_sections = {
+            lualine_a = {},
+            lualine_b = {},
+            lualine_c = {'filename'},
+            lualine_x = {'location'},
+            lualine_y = {},
+            lualine_z = {}
+        },
+    }
+}
+EOF
 
 " NEOSNIPPETS
-imap <Space><Space>     <Plug>(neosnippet_expand_or_jump)
-smap <Space><Space>     <Plug>(neosnippet_expand_or_jump)
-xmap <Space><Space>     <Plug>(neosnippet_expand_target)
+imap <M-space>     <Plug>(neosnippet_expand_or_jump)
+smap <M-space>     <Plug>(neosnippet_expand_or_jump)
+xmap <M-space>     <Plug>(neosnippet_expand_target)
 let g:neosnippet#snippets_directory="${XDG_DATA_HOME}/nvim/custom/snippets"
 
 " AUTOPAIR
@@ -194,9 +207,6 @@ let g:vimtex_compiler_latexmk_engines = {
     \ '_': '-pdf -shell-escape',
     \}
 
-" SEMSHI
-let g:semshi#update_delay_factor = 0.0001
-let g:semshi#error_sign = v:false
 
 " SIMPYLFOLD
 let g:SimpylFold_docstring_preview = 1
@@ -242,18 +252,24 @@ let dndwiki.auto_diary_index = 1
 let g:vimwiki_list = [wiki_main, wiki_lim_baraan, dndwiki]
 
 let g:vimwiki_table_mappings = 0
-nmap <leader>wa :VimwikiAll2HTML<CR><CR>
+nmap <leader>wa :VimwikiAll2HTML<cr><cr>
 nmap <leader>we <Plug>VimwikiSplitLink
 nmap <leader>wq <Plug>VimwikiVSplitLink
 " disable temporary wikis
 let g:vimwiki_global_ext = 0
 
 " NERDTREE
-" open nerdtree
-map <leader>n :NERDTreeToggle<CR>
-" pretty arrows
+" toggle in the right place: https://github.com/jessarcher/dotfiles/blob/master/nvim/plugins/nerdtree.vim
+nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<CR>' : @% == '' ? ':NERDTree<CR>' : ':NERDTreeFind<CR>'
+nmap <leader>N :NERDTreeFind<CR>
+" If more than one window and previous buffer was NERDTree, go back to it.
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+" avoid crashes when calling vim-plug functions while the cursor is on the NERDTree window
+let g:plug_window = 'noautocmd vertical topleft new'
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI=1
 
 " JULIA
 let g:default_julia_version = '1.0'
@@ -265,6 +281,7 @@ local nvim_lsp = require('lspconfig')
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  -- require('folding').on_attach()
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -275,24 +292,19 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  -- conflict with finder buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+  buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.lsp_finder()<cr>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
+  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', opts)
+  buf_set_keymap('n', '<leader>ds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -307,7 +319,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
-
 
 " TELESCOPE
 " Find files using Telescope command-line sugar.
@@ -331,3 +342,37 @@ augroup pencil
     autocmd FileType text call pencil#init()
     autocmd FileType tex call pencil#init()
 augroup END
+
+
+" TREESITTER
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- disable = { "c", "rust" },
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  },
+}
+EOF
+
+" VIM-TEST
+nnoremap <silent> <leader>tn :TestNearest<cr>
+nnoremap <silent> <leader>tf :TestFile<cr>
+nnoremap <silent> <leader>ts :TestSuite<cr>
+nnoremap <silent> <leader>tl :TestLast<cr>
+nnoremap <silent> <leader>tv :TestVisit<cr>
+
+" TROUBLE
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
