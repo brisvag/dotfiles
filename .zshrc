@@ -8,22 +8,22 @@ ZSH_THEME="bira_venvfix"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-	common-aliases
-	git
+    common-aliases
+    git
     git-auto-fetch
-	colored-man-pages
-	colorize
-	pip
-	command-not-found
-	archlinux
+    colored-man-pages
+    colorize
+    pip
+    command-not-found
+    archlinux
     dirhistory
     extract
     fzf
     ripgrep
-	virtualenv
+    virtualenv
     jump
-	zsh-autosuggestions
-	zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-syntax-highlighting
     systemd
 )
 
@@ -45,6 +45,8 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
 
+# Colorscheme
+$HOME/build/theme.sh/bin/theme.sh gruvbox-dark
 
 # SOURCES
 
