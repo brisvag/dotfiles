@@ -75,10 +75,6 @@ export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHO
 # cuda
 export PATH="/opt/cuda/bin:$PATH"
 
-# imod
-export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"
-source $HOME/bin/imod/IMOD-linux.sh
-
 # ALIASES AND SIMILAR
 
 # basic aliases
