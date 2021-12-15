@@ -180,9 +180,9 @@ require('lualine').setup {
 EOF
 
 " NEOSNIPPETS
-imap <M-space>     <Plug>(neosnippet_expand_or_jump)
-smap <M-space>     <Plug>(neosnippet_expand_or_jump)
-xmap <M-space>     <Plug>(neosnippet_expand_target)
+imap <m-tab> <Plug>(neosnippet_expand_or_jump)
+smap <m-tab> <Plug>(neosnippet_expand_or_jump)
+xmap <m-tab> <Plug>(neosnippet_expand_target)
 let g:neosnippet#snippets_directory="${XDG_DATA_HOME}/nvim/custom/snippets"
 
 " AUTOPAIR
