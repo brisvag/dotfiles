@@ -98,7 +98,7 @@ endif
 "   julia
 "   lastplace
 "   lspconfig
-"   lualine (requires InconsolataGo nerd font)
+"   lualine (requires patched nerd font)
 "   nerdcommenter
 "   nerdtree
 "   pynvim

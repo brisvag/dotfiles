@@ -1,6 +1,6 @@
 # <- this tricks vim into using syntax highlighting
 [global]
-    font = Inconsolata 12
+    font = JuliaMono 11
     
     # Allow a small subset of html markup:
     #   <b>bold</b>

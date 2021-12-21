@@ -19,7 +19,7 @@ workspace 9 output DP-2
 workspace 0 output DVI-I-1
 
 # APPEARANCE
-font pango:InconsolataGo Nerd Font Mono bold 14
+font pango:JuliaMono bold 11
 # colors
 set $bg_act		    #505050
 set $text_act	    #FFFFFF
