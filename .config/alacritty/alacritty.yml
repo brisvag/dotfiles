@@ -1,7 +1,7 @@
 # Font configuration
 font:
   normal:
-    family: InconsolataGo Nerd Font Mono
+    family: JuliaMono
   bold:
     style: Bold
   italic:
