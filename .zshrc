@@ -104,6 +104,7 @@ up () {
 }
 alias pip_publish='python setup.py sdist bdist_wheel && twine upload dist/*'
 alias rsync_all='rsync -avztuHAXP'
+alias dud='dust -d 1'
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases
