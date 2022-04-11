@@ -227,6 +227,8 @@ exec --no-startup-id unclutter
 exec --no-startup-id ~/.config/i3/i3-battery-popup -L 15 -n
 # ibus
 exec --no-startup-id ibus-daemon -xdr
+# mouse acceleration disable
+exec --no-startup-id xset m 0 0
 
 # open some applications at startup
 exec --no-startup-id i3-msg 'exec firefox; exec ferdi; exec keepassxc'
