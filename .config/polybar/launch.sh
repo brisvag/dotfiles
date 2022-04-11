@@ -12,7 +12,7 @@ if type "xrandr"; then
     MONITOR=$m polybar --reload bottom &
   done
 else
-  polybar --reload mottom &
+  polybar --reload bottom &
 fi
 
 echo "Bars launched..."

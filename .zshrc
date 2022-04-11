@@ -79,6 +79,9 @@ export PATH="/opt/cuda/bin:$PATH"
 export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"
 source $HOME/bin/imod/IMOD-linux.sh
 
+# ruby
+export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
 # ALIASES AND SIMILAR
 
 # basic aliases
@@ -97,6 +100,7 @@ alias i3conf='vi $XDG_CONFIG_HOME/i3/config'
 alias r='ranger'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
+dsf () {diff -u $1 $2 | diff-so-fancy | less}
 alias :q='exit'
 alias q='exit'
 alias open='xdg-open'
