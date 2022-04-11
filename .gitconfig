@@ -1,11 +1,6 @@
 [user]
     email = brisvag@gmail.com
     name = Lorenzo Gaifas
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
 [core]
     excludesfile = /home/brisvag/.gitignore_global
     pager = diff-so-fancy | less --tabs=4 -R
