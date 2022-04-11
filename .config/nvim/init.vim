@@ -19,7 +19,6 @@ set sidescrolloff=8
 set hidden
 set autoread
 set termguicolors
-set title
 set wildmode=longest:full,full
 set list
 set listchars=tab:▸\ ,trail:·
@@ -29,10 +28,11 @@ set redrawtime=10000 " Allow more time for loading syntax on large files
 set completeopt=menu,menuone,noselect
 set noshowmode
 
+let g:gruvbox_italic=1
 colorscheme gruvbox
-let g:gruvbox_italics=1
 
 au BufRead,BufNewFile *.ipy set filetype=python
+au BufRead,BufNewFile *.qss set filetype=css
 " Automatically reload file when entering buffer or gaining focus
 au FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 
@@ -82,7 +82,7 @@ nnoremap <A-.> :diffget RE<CR>
 
 " PLUGINS
 " Automatically install vim-plug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir =  stdpath('data') . '/site'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -95,12 +95,15 @@ endif
 "   fugitive
 "   gitgutter
 "   gruvbox
+"   hexokinase
 "   julia
 "   lastplace
 "   lspconfig
 "   lualine (requires patched nerd font)
 "   nerdcommenter
 "   nerdtree
+"   nerdtree-syntax-highlight
+"   neorg
 "   pynvim
 "   remote
 "   repeat
@@ -116,9 +119,10 @@ endif
 "   vimwiki
 "   vista
 "   visual-multi
-"   hexokinase
+"   suda
 call plug#begin("$XDG_DATA_HOME/nvim/plugged")
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'tmhedberg/SimpylFold'
 Plug 'kkoomen/vim-doge'
 Plug 'Shougo/neosnippet.vim'
@@ -134,6 +138,9 @@ Plug 'sickill/vim-pasta'
 Plug 'airblade/vim-rooter'
 Plug 'vim-test/vim-test'
 Plug 'bronson/vim-visual-star-search'
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
+Plug 'tikhomirov/vim-glsl'
 call plug#end()
 
 
@@ -141,6 +148,7 @@ call plug#end()
 
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#source('_', 'smart_case', v:true)
 " close automatically on completion
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 " enable completion with latex
@@ -161,7 +169,7 @@ require('lualine').setup {
         theme = 'gruvbox_dark',
         sections = {
             lualine_a = {'mode'},
-            lualine_b = {'branch', 'diff', {'diagnostics', sources={'nvim_lsp'}}},
+            lualine_b = {'branch', 'diff', {'diagnostics', sources={'nvim_diagnostic'}}},
             lualine_c = {'filename'},
             lualine_x = {'buffers'},
             lualine_y = {'progress'},
@@ -297,19 +305,20 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
   buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.lsp_finder()<cr>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+  buf_set_keymap('n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>', opts)
+  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.open_float()<cr>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>', opts)
+  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.setloclist()<cr>', opts)
   buf_set_keymap('n', '<leader>ds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
+  buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'pyright', 'julials' }
+local servers = { 'pylsp', 'julials' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -376,3 +385,15 @@ nnoremap <silent> <leader>tv :TestVisit<cr>
 
 " TROUBLE
 nnoremap <leader>xx <cmd>TroubleToggle<cr>
+
+" DAP
+lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
+nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
+nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
+nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
+nnoremap <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
+nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>

@@ -11,4 +11,4 @@ font:
 
   size: 9.0
 
-background_opacity: 0.95
+window.opacity: 0.95

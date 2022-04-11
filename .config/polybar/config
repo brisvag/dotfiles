@@ -1,4 +1,5 @@
 [bar/bottom]
+monitor = ${env:MONITOR:}
 bottom = true
 enable-ipc = true
 width = 100%
