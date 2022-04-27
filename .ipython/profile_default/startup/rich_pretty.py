@@ -1,3 +1,6 @@
-from rich import pretty, inspect as insp, print
+try:
+    from rich import pretty, inspect as insp, print
 
-pretty.install()
+    pretty.install()
+except ImportError:
+    print('rich is not installed.')
