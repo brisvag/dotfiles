@@ -2,7 +2,7 @@
     email = brisvag@gmail.com
     name = Lorenzo Gaifas
 [core]
-    excludesfile = /home/brisvag/.gitignore_global
+    excludesfile = /home/lorenzo/.gitignore_global
     pager = diff-so-fancy | less --tabs=4 -R
 [diff]
     submodule = log
