@@ -111,7 +111,6 @@ endif
 "   surround
 "   targets(-opt)
 "   telescope
-"   treesitter (and relative languages)
 "   trouble
 "   unimpaired
 "   vim-which-key
@@ -121,6 +120,7 @@ endif
 "   visual-multi
 "   suda
 call plug#begin("$XDG_DATA_HOME/nvim/plugged")
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'tmhedberg/SimpylFold'
@@ -356,9 +356,9 @@ augroup END
 " TREESITTER
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "python", "julia", "json", "glsl", "latex", "bash", "vim", "lua"},
   highlight = {
     enable = true,
-    -- disable = { "c", "rust" },
     additional_vim_regex_highlighting = false,
   },
   incremental_selection = {
