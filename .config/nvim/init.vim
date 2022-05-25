@@ -27,9 +27,11 @@ set updatetime=300 " Reduce time for highlighting other references
 set redrawtime=10000 " Allow more time for loading syntax on large files
 set completeopt=menu,menuone,noselect
 set noshowmode
+set background=dark
 
-let g:gruvbox_italic=1
-colorscheme gruvbox
+" TMP: new filetype detection
+let g:do_filetype_lua = 1
+let g:did_load_filetypes = 0
 
 au BufRead,BufNewFile *.ipy set filetype=python
 au BufRead,BufNewFile *.qss set filetype=css
@@ -88,43 +90,14 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Installed via arch packages
-"   auto-pairs
-"   deoplete
-"   fastfold
-"   fugitive
-"   gitgutter
-"   gruvbox
-"   hexokinase
-"   julia
-"   lastplace
-"   lspconfig
-"   lualine (requires patched nerd font)
-"   nerdcommenter
-"   nerdtree
-"   nerdtree-syntax-highlight
-"   neorg
-"   pynvim
-"   remote
-"   repeat
-"   splitjoin
-"   surround
-"   targets(-opt)
-"   telescope
-"   trouble
-"   unimpaired
-"   vim-which-key
-"   vimtex
-"   vimwiki
-"   vista
-"   visual-multi
-"   suda
+" pynvim needed!
 call plug#begin("$XDG_DATA_HOME/nvim/plugged")
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'PhilRunninger/nerdtree-visual-selection'
-Plug 'tmhedberg/SimpylFold'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'kkoomen/vim-doge'
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'deoplete-plugins/deoplete-lsp'
@@ -132,7 +105,6 @@ Plug 'lervag/vimtex'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'ElPiloto/telescope-vimwiki.nvim'
 Plug 'preservim/vim-pencil'
-"Plug 'pierreglaser/folding-nvim' # currently broken, for now using simpylfold
 Plug 'tommcdo/vim-exchange'
 Plug 'sickill/vim-pasta'
 Plug 'airblade/vim-rooter'
@@ -141,10 +113,40 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
 Plug 'tikhomirov/vim-glsl'
+Plug 'lambdalisue/suda.vim'
+Plug 'liuchengxu/vista.vim'
+Plug 'mg979/vim-visual-multi'
+Plug 'vimwiki/vimwiki'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'kyazdani42/nvim-web-devicons' " needed for trouble and nvim-tree
+Plug 'folke/trouble.nvim'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'wellle/targets.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'mhinz/neovim-remote'
+Plug 'numToStr/Comment.nvim'
+Plug 'nvim-lualine/lualine.nvim' " patched nerd font needed for icons
+Plug 'neovim/nvim-lspconfig'
+Plug 'ethanholz/nvim-lastplace'
+Plug 'RRethy/vim-hexokinase' " requires hexokinase binary
+Plug 'ellisonleao/gruvbox.nvim'
+Plug 'airblade/vim-gitgutter'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 
 " PLUGIN SETTINGS
+
+" GRUVBOX
+let g:gruvbox_italic=1
+let g:gruvbox_transparent_bg=1
+colorscheme gruvbox
 
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
@@ -160,12 +162,19 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 " VISTA
 nnoremap <leader>v :Vista!!<cr>
 let g:vista_stay_on_open = 0
-let g:vista_default_executive = 'nvim_lsp'
+"let g:vista_default_executive = 'nvim_lsp'
+
+" NVIM-TREE
+lua require'nvim-tree'.setup()
+nnoremap <leader>t :NvimTreeToggle<cr>
+" auto-close if last remaining
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
 " LUALINE
 lua << EOF
 require('lualine').setup {
     options = {
+        globalstatus = true,
         theme = 'gruvbox_dark',
         sections = {
             lualine_a = {'mode'},
@@ -174,14 +183,6 @@ require('lualine').setup {
             lualine_x = {'buffers'},
             lualine_y = {'progress'},
             lualine_z = {'location'}
-        },
-        inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = {'filename'},
-            lualine_x = {'location'},
-            lualine_y = {},
-            lualine_z = {}
         },
     }
 }
@@ -198,10 +199,8 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " VIMTEX and latex-related
 " Enable latex filetype even for empty .tex files
-let g:tex_flavor='latexmk'
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-let g:vimtex_view_general_options_latexmk = '--unique'
 let g:vimtex_quickfix_mode=2
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = {
@@ -211,17 +210,12 @@ let g:vimtex_fold_types = {
            \   'blacklist' : ['figures'],
            \ },
            \}
+" shell escape is needed to run external tools needed for compilation
 let g:vimtex_compiler_latexmk_engines = {
-    \ '_': '-pdf -shell-escape',
+    \ '_': '-pdf -shell-escape -lualatex',
     \}
-
-
-" SIMPYLFOLD
-let g:SimpylFold_docstring_preview = 1
-let g:SimpylFold_fold_docstring = 0
-
-" COLORIZER
-let g:colorizer_maxlines = 1000
+let g:vimtex_syntax_enabled = 0
+let g:vimtex_syntax_conceal_disable = 1
 
 " VIMWIKI
 let wiki_main = {}
@@ -265,22 +259,6 @@ nmap <leader>we <Plug>VimwikiSplitLink
 nmap <leader>wq <Plug>VimwikiVSplitLink
 " disable temporary wikis
 let g:vimwiki_global_ext = 0
-
-" NERDTREE
-" toggle in the right place: https://github.com/jessarcher/dotfiles/blob/master/nvim/plugins/nerdtree.vim
-nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<CR>' : @% == '' ? ':NERDTree<CR>' : ':NERDTreeFind<CR>'
-nmap <leader>N :NERDTreeFind<CR>
-" If more than one window and previous buffer was NERDTree, go back to it.
-autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
-" avoid crashes when calling vim-plug functions while the cursor is on the NERDTree window
-let g:plug_window = 'noautocmd vertical topleft new'
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI=1
-
-" JULIA
-let g:default_julia_version = '1.0'
 
 " LANGUAGE SERVER
 lua << EOF
@@ -354,6 +332,8 @@ augroup END
 
 
 " TREESITTER
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "python", "julia", "json", "glsl", "latex", "bash", "vim", "lua"},
@@ -373,6 +353,15 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true
   },
+  textobjects = {
+    enable = true
+  },
+  context = {
+    enable = true
+  },
+  rainbow = {
+    enable = true
+  },
 }
 EOF
 
@@ -386,14 +375,5 @@ nnoremap <silent> <leader>tv :TestVisit<cr>
 " TROUBLE
 nnoremap <leader>xx <cmd>TroubleToggle<cr>
 
-" DAP
-lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
-nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
-nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
-nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
-nnoremap <silent> <leader>b :lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <leader>B :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <leader>lp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
-nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
+" COMMENT
+lua require('Comment').setup()

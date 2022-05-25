@@ -110,7 +110,7 @@ up () {
     yay
     vi +PlugUpdate +qall
 }
-alias pip_publish='python setup.py sdist bdist_wheel && twine upload dist/*'
+alias pip_publish='python -m build && twine upload dist/*'
 alias rsync_all='rsync -avztuHAXP'
 alias dud='dust -d 1'
 
@@ -127,6 +127,7 @@ alias gusup='git branch --set-upstream-to=upstream/$(git_current_branch)'
 alias glud='git pull upstream develop'
 alias gruh='git reset upstream/$(git_current_branch) --hard'
 alias gdum='git diff upstream/main'
+alias gdo='git diff origin/$(git_current_branch)'
 graa () {git remote add "$1" "git@github.com:$1/$(git_repo_name).git"}
 grao () {git remote add origin git@github.com:brisvag/$(git_repo_name).git}
 gclo () {git clone git@github.com:brisvag/$1.git}
