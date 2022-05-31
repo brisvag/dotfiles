@@ -138,6 +138,7 @@ Plug 'RRethy/vim-hexokinase' " requires hexokinase binary
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
+Plug 'mhinz/vim-startify'
 call plug#end()
 
 
