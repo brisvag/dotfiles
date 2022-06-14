@@ -119,7 +119,8 @@ alias dud='dust -d 1'
 # - dot git config --local status.showUntrackedFiles no
 alias dot='GIT_DIR=~/.dotfiles/ GIT_WORK_TREE=~/ '
 alias dotlist='dot git ls-tree --full-tree --name-only -r HEAD'
-alias sysdot='GIT_DIR=~/.system_dotfiles/ GIT_WORK_TREE=/ sudo --preserve-env '
+alias sysdot='GIT_DIR=~/.system_dotfiles/ GIT_WORK_TREE=/ '
+alias sysdotsudo='GIT_DIR=~/.system_dotfiles/ GIT_WORK_TREE=/ sudo --preserve-env '
 alias sysdotlist='sysdot git ls-tree --full-tree --name-only -r HEAD'
 
 # git aliases
