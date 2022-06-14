@@ -21,6 +21,7 @@ plugins=(
     fzf
     ripgrep
     virtualenv
+    virtualenvwrapper
     jump
     zsh-autosuggestions
     zsh-syntax-highlighting
@@ -86,6 +87,7 @@ alias l='exa -lh --git --group-directories-first'
 alias la='l -a'
 alias lt='l -s new' 
 alias ltree='l -TI "__pycache__"'
+alias lg='l --git-ignore'
 alias rg='rg -S'
 alias cat='bat -p'
 alias rm='rm -I'
@@ -127,3 +129,7 @@ alias gdo='git diff origin/$(git_current_branch)'
 graa () {git remote add "$1" "git@github.com:$1/$(git_repo_name).git"}
 grao () {git remote add origin git@github.com:brisvag/$(git_repo_name).git}
 gclo () {git clone git@github.com:brisvag/$1.git}
+
+# virtualenv
+export WORKON_HOME="~/venv"
+source /usr/bin/virtualenvwrapper.sh
