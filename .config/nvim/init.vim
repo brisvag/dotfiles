@@ -38,6 +38,9 @@ au BufRead,BufNewFile *.qss set filetype=css
 " Automatically reload file when entering buffer or gaining focus
 au FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 
+" ensure plugins always use system python
+let g:python3_host_prog = '/usr/bin/python'
+
 
 " GENERAL MAPPINGS
 
