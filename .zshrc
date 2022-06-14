@@ -118,8 +118,13 @@ alias dud='dust -d 1'
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases
+# requires:
+# - git init --bare $HOME/.dotfiles
+# - dot git config --local status.showUntrackedFiles no
 alias dot='GIT_DIR=~/.dotfiles/ GIT_WORK_TREE=~/ '
 alias dotlist='dot git ls-tree --full-tree --name-only -r HEAD'
+alias sysdot='GIT_DIR=~/.system_dotfiles/ GIT_WORK_TREE=/ sudo --preserve-env '
+alias sysdotlist='sysdot git ls-tree --full-tree --name-only -r HEAD'
 
 # git aliases
 compdef -d mmd # needed to remove conflict of mcd with MultiMarkdown
@@ -133,6 +138,7 @@ alias gdo='git diff origin/$(git_current_branch)'
 graa () {git remote add "$1" "git@github.com:$1/$(git_repo_name).git"}
 grao () {git remote add origin git@github.com:brisvag/$(git_repo_name).git}
 gclo () {git clone git@github.com:brisvag/$1.git}
+gfork () {gh repo fork --clone --remote $1}
 
 # virtualenv
 export WORKON_HOME="~/venv"
