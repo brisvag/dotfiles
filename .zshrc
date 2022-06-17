@@ -115,6 +115,11 @@ up () {
 alias pip_publish='python -m build && twine upload dist/*'
 alias rsync_all='rsync -avztuHAXP'
 alias dud='dust -d 1'
+notify () {
+    $@;
+    notify-send -u normal -i /usr/share/icons/breeze-dark/preferences/32/preferences-desktop-notification-bell.svg -a 'Job Done!' "$@ "
+    echo -e '\a'
+}
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases

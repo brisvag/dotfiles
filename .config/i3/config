@@ -16,7 +16,7 @@ workspace 6 output DP-2
 workspace 7 output DVI-I-1
 workspace 8 output DP-3
 workspace 9 output DP-2
-workspace 0 output DVI-I-1
+workspace 10 output DVI-I-1
 
 # APPEARANCE
 font pango:JuliaMono bold 11
@@ -59,8 +59,12 @@ for_window [class="(.*)jetbrains-pycharm(.*)"] title_format "   <span fon
 # make spotify open on workspace 10
 for_window [class="Spotify"] move to workspace 10
 # make ferdi open on the scratchpad and resize (needs to be made visible)
-for_window [class="Ferdi"] move scratchpad
-for_window [class="Ferdi"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="zulip"] move scratchpad
+for_window [instance="zulip"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="whatsapp-for-linux"] move scratchpad
+for_window [instance="whatsapp-for-linux"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="signal"] move scratchpad
+for_window [instance="signal"] scratchpad show, resize set 1400 900, move position center, scratchpad show
 # fix vmd layout on startup
 for_window [title="VMD Main"] floating toggle
 for_window [title="VisPy canvas"] floating toggle
@@ -122,9 +126,9 @@ bindsym $mod+o sticky toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 # focus the child container
-bindsym $mod+s focus child
+# bindsym $mod+s focus child
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -147,9 +151,6 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
-#scratchpad: hidden floating workspace
-bindsym $mod+z scratchpad show
-bindsym $mod+Shift+z move scratchpad
 # cycle through worskspaces
 bindsym $mod+Tab workspace next
 # close every window on every workspace
@@ -186,6 +187,10 @@ bindsym $mod+r exec alacritty -e ranger "`xcwd`"
 bindsym --release $mod+p exec "import ~/pictures/i3screenshot.png && xclip -selection clipboard -target image/png ~/pictures/i3screenshot.png"
 # open bluetooth manager
 bindsym $mod+b exec blueman-manager
+# scratchpad apps
+bindsym $mod+s [instance="signal"] scratchpad show
+bindsym $mod+w [instance="whatsapp-for-linux"] scratchpad show
+bindsym $mod+z [instance="zulip"] scratchpad show
 
 # $mod+Shift+p is taken by keepass!
 
@@ -250,9 +255,11 @@ exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon -xdr
 
 # open some applications at startup
-exec --no-startup-id i3-msg 'exec firefox; exec ferdi; exec keepassxc'
+exec --no-startup-id i3-msg 'exec firefox; exec keepassxc; exec whatsapp-for-linux; exec signal-desktop; exec zulip'
 # swap escape and caps lock
 exec --no-startup-id setxkbmap -option caps:swapescape
 
-# open applications that need delayed startup
-exec --no-startup-id ~/.config/i3/delayed_startup.sh
+# auto-hide scratchpad windowso
+exec --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,whatsapp-for-linux,,
+exec --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,signal,,
+exec --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,zulip,,
