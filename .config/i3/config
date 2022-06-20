@@ -61,8 +61,10 @@ for_window [class="Spotify"] move to workspace 10
 # make ferdi open on the scratchpad and resize (needs to be made visible)
 for_window [instance="zulip"] move scratchpad
 for_window [instance="zulip"] scratchpad show, resize set 1400 900, move position center, scratchpad show
-for_window [instance="whatsapp-for-linux"] move scratchpad
-for_window [instance="whatsapp-for-linux"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="whatsapp-nativefier(.*)"] move scratchpad
+for_window [instance="whatsapp-nativefier(.*)"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="googlecalendar-nativefier(.*)"] move scratchpad
+for_window [instance="googlecalendar-nativefier(.*)"] scratchpad show, resize set 1400 900, move position center, scratchpad show
 for_window [instance="signal"] move scratchpad
 for_window [instance="signal"] scratchpad show, resize set 1400 900, move position center, scratchpad show
 # fix vmd layout on startup
@@ -174,11 +176,11 @@ bindsym $mod+Return exec alacritty --working-directory "`xcwd`"
 # start rofi (dmenu alternative)
 bindsym $mod+d exec "rofi -show drun -theme ~/.config/rofi/brisvag.rasi"
 # open firefox
-bindsym $mod+c exec firefox
+bindsym $mod+x exec firefox
 # and open firefox in youtube mode
 bindsym $mod+y exec "firefox -new-window https://youtube.com/"
 # and in incognito mode
-bindsym $mod+x exec "firefox -private-window"
+bindsym $mod+i exec "firefox -private-window"
 # open spotify using mod+play
 bindsym $mod+XF86AudioPlay exec spotify
 # open ranger (file mamager)
@@ -189,7 +191,8 @@ bindsym --release $mod+p exec "import ~/pictures/i3screenshot.png && xclip -sele
 bindsym $mod+b exec blueman-manager
 # scratchpad apps
 bindsym $mod+s [instance="signal"] scratchpad show
-bindsym $mod+w [instance="whatsapp-for-linux"] scratchpad show
+bindsym $mod+w [instance="whatsapp-nativefier"] scratchpad show
+bindsym $mod+c [instance="googlecalendar-nativefier"] scratchpad show
 bindsym $mod+z [instance="zulip"] scratchpad show
 
 # $mod+Shift+p is taken by keepass!
@@ -255,11 +258,9 @@ exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon -xdr
 
 # open some applications at startup
-exec --no-startup-id i3-msg 'exec firefox; exec keepassxc; exec whatsapp-for-linux; exec signal-desktop; exec zulip'
+exec --no-startup-id i3-msg 'exec firefox; exec keepassxc; exec whatsapp-nativefier; exec google-calendar-nativefier; exec signal-desktop --use-tray-icon; exec zulip'
 # swap escape and caps lock
 exec --no-startup-id setxkbmap -option caps:swapescape
 
 # auto-hide scratchpad windowso
-exec --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,whatsapp-for-linux,,
-exec --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,signal,,
-exec --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,zulip,,
+exec_always --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,whatsapp-nativefier-d40211,, True,,,googlecalendar-nativefier-e22938,, True,,,signal,, True,,,zulip,,
