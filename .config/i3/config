@@ -28,20 +28,12 @@ client.urgent           $bg_urg	    $bg_urg	    $text_urg	$bg_urg	    	$bg_urg
 client.placeholder      $plhold	    $plhold	    $text_act	$plhold	    	$plhold
 client.background       $bg_client
 # add gaps (if you want to remove title bars, change 'normal' to 'pixel')
-for_window [class="^.*"] border normal 2
+for_window [class="^.*"] border pixel 2
 gaps inner 8
 gaps outer -1
 # show borders and gaps only when the workspace has more than one container
 smart_borders on
 smart_gaps on
-# base title format
-for_window [class="^.*"] title_format "<span font_weight='heavy'>%title</span>"
-# this is the thin space charachter used before and after icons: " "
-# icons for specific title bars
-for_window [class="(.*)firefox(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
-for_window [class="(.*)Alacritty(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
-for_window [class="(.*)Chromium(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
-for_window [class="(.*)jetbrains-pycharm(.*)"] title_format "   <span font_weight='heavy'>%title</span>"
 
 # WINDOW-SPECIFIC SETTINGS
 
