@@ -211,6 +211,8 @@ bindsym XF86MonBrightnessUp exec "light -A 5"
 # STARTUP COMMANDS #
 # ################ #
 
+# multi monitor setup
+exec --no-startup-id "$XDG_CONFIG_HOME/xrandr/screen_layout.sh"
 # start polybar
 exec --no-startup-id ~/.config/polybar/launch.sh
 # policykit agent
