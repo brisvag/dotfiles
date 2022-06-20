@@ -15,6 +15,7 @@ xrandr \
     --pos 3120x324 \
     --rotate normal \
     --output DP-3 \
+    --primary \
     --mode 1920x1080 \
     --pos 1200x324 \
     --rotate normal \
