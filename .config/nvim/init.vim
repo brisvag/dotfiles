@@ -95,53 +95,54 @@ endif
 
 " pynvim needed!
 call plug#begin("$XDG_DATA_HOME/nvim/plugged")
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'kkoomen/vim-doge'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'deoplete-plugins/deoplete-lsp'
-Plug 'lervag/vimtex'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ElPiloto/telescope-vimwiki.nvim'
-Plug 'preservim/vim-pencil'
-Plug 'tommcdo/vim-exchange'
-Plug 'sickill/vim-pasta'
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'RRethy/vim-hexokinase' " requires hexokinase binary
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'vim-test/vim-test'
 Plug 'bronson/vim-visual-star-search'
+Plug 'deoplete-plugins/deoplete-lsp'
+Plug 'ellisonleao/gruvbox.nvim'
+Plug 'ethanholz/nvim-lastplace'
+Plug 'folke/trouble.nvim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'kkoomen/vim-doge'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons' " needed for trouble and nvim-tree
+Plug 'lambdalisue/suda.vim'
+Plug 'lervag/vimtex'
+Plug 'liuchengxu/vista.vim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
-Plug 'tikhomirov/vim-glsl'
-Plug 'lambdalisue/suda.vim'
-Plug 'liuchengxu/vista.vim'
 Plug 'mg979/vim-visual-multi'
-Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-fugitive'
-Plug 'kyazdani42/nvim-web-devicons' " needed for trouble and nvim-tree
-Plug 'folke/trouble.nvim'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'JuliaEditorSupport/julia-vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'wellle/targets.vim'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'mhinz/neovim-remote'
-Plug 'numToStr/Comment.nvim'
-Plug 'nvim-lualine/lualine.nvim' " patched nerd font needed for icons
-Plug 'neovim/nvim-lspconfig'
-Plug 'ethanholz/nvim-lastplace'
-Plug 'RRethy/vim-hexokinase' " requires hexokinase binary
-Plug 'ellisonleao/gruvbox.nvim'
-Plug 'airblade/vim-gitgutter'
-Plug 'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-startify'
+Plug 'neovim/nvim-lspconfig'
+Plug 'numToStr/Comment.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lualine/lualine.nvim' " patched nerd font needed for icons
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'p00f/nvim-ts-rainbow'
+Plug 'preservim/vim-pencil'
+Plug 'sickill/vim-pasta'
+Plug 'tikhomirov/vim-glsl'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-test/vim-test'
+Plug 'vimwiki/vimwiki'
+Plug 'wellle/targets.vim'
 call plug#end()
 
 
@@ -381,3 +382,7 @@ nnoremap <leader>xx <cmd>TroubleToggle<cr>
 
 " COMMENT
 lua require('Comment').setup()
+
+" EASY-ALIGN
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
