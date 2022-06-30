@@ -49,9 +49,11 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" Reselect visual selection after indenting
-vnoremap < <gv
-vnoremap > >gv
+" Move/indent visual selection
+vnoremap <S-Left> <gv
+vnoremap <S-Right> >gv
+vmap <S-Up> [egv
+vmap <S-Down> ]egv
 " Maintain the cursor position when yanking/joining a visual selection
 " works by putting markers and jumping back to them
 " http://ddrscott.github.io/blog/2016/yank-without-jank/
@@ -314,14 +316,32 @@ EOF
 " TELESCOPE
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fg <cmd>Telescope grep_string only_sort_text=true<cr>  "vim-telescope/telescope.nvim#564
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fz <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fw <cmd>Telescope vimwiki<cr>
 lua <<EOF
-    require('telescope').load_extension('fzf')
-    require('telescope').load_extension('vimwiki')
+    local telescope = require("telescope")
+
+    telescope.setup {
+        defaults = {
+            set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
+        },
+        pickers = {
+            find_files = {
+                find_command = {
+                    "fd",
+                    "--type", "file",
+                    "--exclude", ".git/",
+                    "--hidden",  -- show hidden files
+                },
+            },
+        },
+    }
+
+    telescope.load_extension('fzf')
+    telescope.load_extension('vimwiki')
 EOF
 
 
