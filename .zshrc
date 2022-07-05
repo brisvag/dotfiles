@@ -76,10 +76,6 @@ export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHO
 # cuda
 export PATH="/opt/cuda/bin:$PATH"
 
-# imod
-export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"
-source $HOME/bin/imod/IMOD-linux.sh
-
 # ruby
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
@@ -178,5 +174,9 @@ dynamo () {
     source dynamo_activate_linux_shipped_MCR.sh
     cd $tmp
 }
+
+# imod
+export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"
+source $HOME/bin/imod/IMOD-linux.sh
 
 export JULIA_NUM_THREADS=32

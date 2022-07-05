@@ -227,7 +227,6 @@ exec --no-startup-id "$XDG_CONFIG_HOME/xrandr/screen_layout.sh; ~/.config/polyba
 exec --no-startup-id /usr/bin/lxqt-policykit-agent
 exec --no-startup-id nm-applet
 exec --no-startup-id start-pulseaudio-x11
-# bluetooth
 exec --no-startup-id blueman-applet
 exec --no-startup-id dunst -conf .config/dunst/dunstrc
 # composite manager for transparency and other improvements
@@ -236,9 +235,7 @@ exec --no-startup-id ~/.config/i3/wallpaper.sh
 exec --no-startup-id setxkbmap -layout us
 # unclutter (auto-hide cursor)
 exec --no-startup-id unclutter
-# ibus
 exec --no-startup-id ibus-daemon -xdr
-# swap escape and caps lock
 exec --no-startup-id setxkbmap -option caps:swapescape
 exec --no-startup-id i3-msg 'exec firefox; exec keepassxc; exec whatsapp-nativefier; exec google-calendar-nativefier; exec signal-desktop --use-tray-icon; exec zulip'
 # auto-hide scratchpad windows
