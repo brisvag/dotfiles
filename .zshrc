@@ -79,6 +79,9 @@ export PATH="/opt/cuda/bin:$PATH"
 # ruby
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
+# python debug
+export PYTHONBREAKPOINT="ipdb.set_trace"
+
 # ALIASES AND SIMILAR
 
 # basic aliases
