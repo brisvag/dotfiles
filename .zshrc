@@ -8,24 +8,25 @@ ZSH_THEME="bira_venvfix"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-    common-aliases
-    git
-    git-auto-fetch
+    archlinux
     colored-man-pages
     colorize
-    pip
     command-not-found
-    archlinux
+    common-aliases
     dirhistory
     extract
     fzf
+    git
+    git-auto-fetch
+    jump
+    pip
     ripgrep
+    systemd
     virtualenv
     virtualenvwrapper
-    jump
+    z
     zsh-autosuggestions
     zsh-syntax-highlighting
-    systemd
 )
 
 # FZF
@@ -74,7 +75,7 @@ export FREEMOL="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol"
 export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHONPATH"
 
 # cuda
-export PATH="/opt/cuda/bin:$PATH"
+export PATH="$PATH:/opt/cuda/bin"
 
 # ruby
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
@@ -119,6 +120,7 @@ notify () {
     notify-send -u normal -i /usr/share/icons/breeze-dark/preferences/32/preferences-desktop-notification-bell.svg -a 'Job Done!' "$@ "
     echo -e '\a'
 }
+alias pytestdbg='pytest --pdb --pdbcls=IPython.terminal.debugger:Pdb'
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases
