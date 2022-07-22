@@ -83,8 +83,8 @@ function ToggleSpellCheck()
 endfunction
 nnoremap <c-g> :call ToggleSpellCheck()<cr>
 " accept local or remote changes with mergetool
-nnoremap <A-,> :diffget LO<CR>
-nnoremap <A-.> :diffget RE<CR>
+nnoremap <A-,> :diffget LOCAL<CR>
+nnoremap <A-.> :diffget REMOTE<CR>
 
 
 " PLUGINS
