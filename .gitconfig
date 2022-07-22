@@ -3,7 +3,7 @@
     name = Lorenzo Gaifas
 [core]
     excludesfile = /home/lorenzo/.gitignore_global
-    pager = diff-so-fancy | less --tabs=4 -R
+    pager = diff-so-fancy | less --tabs=4 -RFX
 [diff]
     submodule = log
 [push]
@@ -11,9 +11,14 @@
 [pull]
     rebase = false
 [merge]
-    tool = nvimdiff2
+    tool = vimdiff
+	conflictstyle = diff3
+[mergetool "vimdiff"]
+    path = nvim
 [interactive]
     diffFilter = diff-so-fancy --patch
+[add "interactive"]
+    useBuiltin = false
 [init]
     defaultBranch = main
 [alias]
@@ -26,3 +31,18 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color]
+	ui = true
