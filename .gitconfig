@@ -3,7 +3,7 @@
     name = Lorenzo Gaifas
 [core]
     excludesfile = /home/brisvag/.gitignore_global
-    pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = diff-so-fancy | bat -p
 [diff]
     submodule = log
 [push]
