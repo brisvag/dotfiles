@@ -1,26 +1,25 @@
-# Path to oh-my-zsh installation
 export ZSH="/usr/share/oh-my-zsh"
 
-# theme
 ZSH_THEME="bira"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
     archlinux
+    bgnotify
     colored-man-pages
     colorize
     command-not-found
     common-aliases
     dirhistory
     extract
+    fancy-ctrl-z
+    fd
     fzf
+    gh
     git
     git-auto-fetch
-    jump
     pip
     ripgrep
+    safe-paste
     systemd
     virtualenv
     virtualenvwrapper
@@ -28,6 +27,23 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
+
+# BGNOTIFY
+bgnotify_threshold=20
+function bgnotify_formatted {
+    ## $1=exit_status, $2=command, $3=elapsed_time
+    if [[ $1 -eq 0 ]]; then
+        title="Job done!"
+        # https://upload.wikimedia.org/wikipedia/commons/3/3b/Eo_circle_green_checkmark.svg
+        icon=$XDG_DATA_HOME/icons/green_check.svg
+    else
+        title="Job failed!"
+        # https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg
+        icon=$XDG_DATA_HOME/icons/red_cross.svg
+    fi
+    notify-send -u normal -i $icon -a $title "Finished in $3 s." $2
+    echo -e '\a'
+}
 
 # FZF
 export FZF_DEFAULT_COMMAND='fd'
@@ -115,11 +131,6 @@ up () {
 alias pip_publish='python -m build && twine upload dist/*'
 alias rsync_all='rsync -avztuHAXP'
 alias dud='dust -d 1'
-notify () {
-    $@;
-    notify-send -u normal -i /usr/share/icons/breeze-dark/preferences/32/preferences-desktop-notification-bell.svg -a 'Job Done!' "$@ "
-    echo -e '\a'
-}
 alias pytestdbg='pytest --pdb --pdbcls=IPython.terminal.debugger:Pdb'
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
