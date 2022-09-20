@@ -126,7 +126,7 @@ alias feh='feh -d.'
 mcd () {mkdir -p "$1" && cd "$1"}
 up () {
     yay
-    vi +PlugUpdate +qall
+    vi +PlugUpdate +TSUpdate +qall
 }
 alias pip_publish='python -m build && twine upload dist/*'
 alias rsync_all='rsync -avztuHAXP'
