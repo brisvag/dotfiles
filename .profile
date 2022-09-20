@@ -8,5 +8,5 @@ export EDITOR='nvim'
 # export ARCHFLAGS="-arch x86_64"
 export TERM="alacritty"
 export BROWSER="firefox"
-export READER="mupdf"
+export READER="okular"
 export FILE="ranger"
