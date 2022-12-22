@@ -85,6 +85,10 @@ nnoremap <c-g> :call ToggleSpellCheck()<cr>
 " accept local or remote changes with mergetool
 nnoremap <A-,> :diffget LOCAL<CR>
 nnoremap <A-.> :diffget REMOTE<CR>
+nnoremap <A-/> :diffget BASE<CR>
+vnoremap <A-,> :diffget LOCAL<CR>
+vnoremap <A-.> :diffget REMOTE<CR>
+vnoremap <A-/> :diffget BASE<CR>
 
 
 " PLUGINS
@@ -114,7 +118,7 @@ Plug 'folke/trouble.nvim'
 Plug 'f-person/git-blame.nvim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-Plug 'kkoomen/vim-doge'
+Plug 'kkoomen/vim-doge', { 'do': ':call doge#install()'}
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons' " needed for trouble and nvim-tree
 Plug 'lambdalisue/suda.vim'
@@ -299,7 +303,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.setloclist()<cr>', opts)
-  buf_set_keymap('n', '<leader>ds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
+  -- buf_set_keymap('n', '<leader>ds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
   buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
 end
 
@@ -409,3 +413,6 @@ lua require('Comment').setup()
 " EASY-ALIGN
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+" DOGE
+let g:doge_doc_standard_python = 'numpy'
