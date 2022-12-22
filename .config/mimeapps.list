@@ -251,6 +251,8 @@ x-scheme-handler/https=firefox.desktop
 x-scheme-handler/mailto=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/ferdi=ferdi.desktop
+x-scheme-handler/discord-402572971681644545=discord-402572971681644545.desktop
+x-scheme-handler/discord-455712169795780630=discord-455712169795780630.desktop
 
 [Added Associations]
 text/plain=nvim.desktop;

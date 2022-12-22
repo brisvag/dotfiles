@@ -109,7 +109,7 @@ alias lt='l -s new'
 alias ltree='l -TI "__pycache__"'
 alias lg='l --git-ignore'
 alias rg='rg -S'
-alias cat='bat -p'
+alias cat='bat'
 alias rm='rm -I'
 alias vi='nvim'
 alias vim='vi'
@@ -118,21 +118,24 @@ alias i3conf='vi $XDG_CONFIG_HOME/i3/config'
 alias r='ranger'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
-dsf () {diff -u $1 $2 | diff-so-fancy | less}
+dsf () {diff -u $@ | diff-so-fancy | less}
 alias :q='exit'
 alias q='exit'
 alias open='xdg-open'
 alias feh='feh -d.'
-mcd () {mkdir -p "$1" && cd "$1"}
-up () {
-    yay
-    vi +PlugUpdate +TSUpdate +qall
-}
+up () {(set -e; yay; vi +PlugUpdate +TSUpdate +qall)}
 alias pip_publish='python -m build && twine upload dist/*'
-alias rsync_all='rsync -avztuHAXP'
+alias rsync_all='rsync -avztuhHAXP'
 alias dud='dust -d 1'
-alias pytestdbg='pytest --pdb --pdbcls=IPython.terminal.debugger:Pdb'
+alias pydbg='python -m ipdb -c continue'
+alias pytestdbg='pytest -s --pdb --pdbcls=IPython.terminal.debugger:Pdb'
 alias F="| fzf"
+alias fzf='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
+tailf () {tail -F "$@" | bat --paging=never}
+unalias help  # man alias
+help () {"$@" --help 2>&1 | bat --plain --language=help}
+man () {/usr/bin/man "$@" | bat --plain --language=man}
+alias catw='bat --wrap never'
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases
@@ -146,18 +149,20 @@ alias sysdotsudo='GIT_DIR=~/.system_dotfiles/ GIT_WORK_TREE=/ sudo --preserve-en
 alias sysdotlist='sysdot git ls-tree --full-tree --name-only -r HEAD'
 
 # git aliases
-compdef -d mmd # needed to remove conflict of mcd with MultiMarkdown
 unalias gam # otherwise is used for `git am`
 gam () {git add "$1" && git commit -m "$2"} # need quotes on the message
 alias gusup='git branch --set-upstream-to=upstream/$(git_current_branch)'
-alias glud='git pull upstream develop'
+alias glom='git pull origin main'
 alias gruh='git reset upstream/$(git_current_branch) --hard'
-alias gdum='git diff upstream/main'
+alias gdum='git diff upstream/$(git_main_branch)'
+alias gdom='git diff origin/$(git_main_branch)'
 alias gdo='git diff origin/$(git_current_branch)'
 graa () {git remote add "$1" "git@github.com:$1/$(git_repo_name).git"}
-grao () {git remote add origin git@github.com:brisvag/$(git_repo_name).git}
+grao () {git remote add origin "git@github.com:brisvag/$(git_repo_name).git"}
+grau () {git remote add upstream "git@github.com:$1/$(git_repo_name).git"}
 gclo () {git clone git@github.com:brisvag/$1.git}
-gfork () {gh repo fork --clone --remote $1}
+alias gfork="gh repo fork --clone --remote"
+alias ghrw="gr repo view -w"
 
 # virtualenv
 export WORKON_HOME="~/venv"
