@@ -51,6 +51,8 @@ for_window [instance="signal"] scratchpad show, resize set 1400 900, move positi
 # fix vmd layout on startup
 for_window [title="VMD Main"] floating toggle
 for_window [title="VisPy canvas"] floating toggle
+# chimera dialogs
+for_window [class="Toplevel"] floating toggle
 
 
 # ############ #
