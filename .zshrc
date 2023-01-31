@@ -131,7 +131,7 @@ alias dud='dust -d 1'
 alias pydbg='python -m ipdb -c continue'
 alias pytestdbg='pytest -s --pdb --pdbcls=IPython.terminal.debugger:Pdb'
 alias F="| fzf"
-alias fzf='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
+alias fzcat='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
 tailf () {tail -F "$@" | bat --paging=never}
 unalias help  # man alias
 help () {"$@" --help 2>&1 | bat --plain --language=help}
