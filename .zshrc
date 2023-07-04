@@ -139,6 +139,7 @@ unalias help  # man alias
 help () {"$@" --help 2>&1 | bat --plain --language=help}
 man () {/usr/bin/man "$@" | bat --plain --language=man}
 alias catw='bat --wrap never'
+alias xclip='xclip -selection c'  # send to system clipboard by default
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases

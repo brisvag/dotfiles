@@ -240,5 +240,6 @@ exec --no-startup-id unclutter
 exec --no-startup-id ibus-daemon -xdr
 exec --no-startup-id setxkbmap -option caps:swapescape
 exec --no-startup-id i3-msg 'exec firefox; exec keepassxc; exec whatsapp-nativefier; exec google-calendar-nativefier; exec signal-desktop --use-tray-icon; exec zulip'
+exec --no-startup-id udiskie --tray
 # auto-hide scratchpad windows
 exec_always --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,whatsapp-nativefier-d40211,, True,,,googlecalendar-nativefier-e22938,, True,,,signal,, True,,,zulip,,
