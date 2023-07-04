@@ -28,7 +28,7 @@ client.urgent           $bg_urg     $bg_urg     $text_urg   $bg_urg         $bg_
 client.placeholder      $plhold     $plhold     $text_act   $plhold         $plhold
 client.background       $bg_client
 # add gaps (if you want to remove title bars, change 'normal' to 'pixel')
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 # gaps inner 8
 # gaps outer -1
 # # show borders and gaps only when the workspace has more than one container
@@ -41,13 +41,13 @@ for_window [class="^.*"] border pixel 2
 for_window [class="Spotify"] move to workspace 10
 # make ferdi open on the scratchpad and resize (needs to be made visible)
 for_window [instance="zulip"] move scratchpad
-for_window [instance="zulip"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="zulip"] scratchpad show, resize set 1760 1100, move position center, scratchpad show
 for_window [instance="whatsapp-nativefier(.*)"] move scratchpad
-for_window [instance="whatsapp-nativefier(.*)"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="whatsapp-nativefier(.*)"] scratchpad show, resize set 1760 1100, move position center, scratchpad show
 for_window [instance="googlecalendar-nativefier(.*)"] move scratchpad
-for_window [instance="googlecalendar-nativefier(.*)"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="googlecalendar-nativefier(.*)"] scratchpad show, resize set 1760 1100, move position center, scratchpad show
 for_window [instance="signal"] move scratchpad
-for_window [instance="signal"] scratchpad show, resize set 1400 900, move position center, scratchpad show
+for_window [instance="signal"] scratchpad show, resize set 1760 1100, move position center, scratchpad show
 # fix vmd layout on startup
 for_window [title="VMD Main"] floating toggle
 for_window [title="VisPy canvas"] floating toggle
@@ -218,7 +218,6 @@ exec --no-startup-id ~/.config/i3/wallpaper.sh
 exec --no-startup-id setxkbmap -layout us
 # unclutter (auto-hide cursor)
 exec --no-startup-id unclutter
-exec --no-startup-id ~/.config/i3/i3-battery-popup -L 15 -n
 exec --no-startup-id ibus-daemon -xdr
 # mouse acceleration disable
 exec --no-startup-id xset m 0 0
@@ -229,3 +228,4 @@ exec --no-startup-id udiskie --tray
 exec_always --no-startup-id ~/.config/i3/auto_scratchpad.py True,,,whatsapp-nativefier,, True,,,googlecalendar-nativefier,, True,,,signal,, True,,,zulip,,
 # monitor setup and polybar (need to run in series to avoid race condition)
 exec --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id slimbookbattery --minimize

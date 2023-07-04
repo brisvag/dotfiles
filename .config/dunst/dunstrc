@@ -1,11 +1,11 @@
 [global]
 follow = keyboard
 enable_posix_regex=true
-width = 375
-height = 200
-offset = 20x20
+width = 280
+height = 130
+offset = 10x10
 idle_threshold = 120
-font = JuliaMono 11
+font = JuliaMono 7
 
 format = "<span size="x-large" weight="ultrabold">%a</span>\n<span size="large" style="italic">%s</span>\n%b\n%p"
 transparency = 5
