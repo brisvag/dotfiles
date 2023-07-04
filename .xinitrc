@@ -1,4 +1,4 @@
 #!/bin/sh
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
+xrdb -merge ~/.Xresources
+~/.config/xrandr/screen_layout.sh
 exec i3

@@ -143,6 +143,7 @@ alias xclip='xclip -selection c'  # send to system clipboard by default
 # requires:
 # - git init --bare $HOME/.dotfiles
 # - dot git config --local status.showUntrackedFiles no
+# - dot git remote add origin git@github.com:brisvag/dotfiles.git
 alias dot='GIT_DIR=~/.dotfiles/ GIT_WORK_TREE=~/ '
 alias dotlist='dot git ls-tree --full-tree --name-only -r HEAD'
 alias sysdot='GIT_DIR=~/.system_dotfiles/ GIT_WORK_TREE=/ '
@@ -168,3 +169,21 @@ alias ghrw="gr repo view -w"
 # virtualenv
 export WORKON_HOME="~/venv"
 source /usr/bin/virtualenvwrapper.sh
+
+conda_init () {
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/opt/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/opt/mambaforge/etc/profile.d/conda.sh" ]; then
+            . "/opt/mambaforge/etc/profile.d/conda.sh"
+        else
+            export PATH="/opt/mambaforge/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+}
+

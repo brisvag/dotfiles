@@ -31,7 +31,7 @@ set background=dark
 
 " TMP: new filetype detection
 let g:do_filetype_lua = 1
-let g:did_load_filetypes = 0
+"let g:did_load_filetypes = 0
 
 au BufRead,BufNewFile *.ipy set filetype=python
 au BufRead,BufNewFile *.qss set filetype=css
@@ -133,7 +133,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lualine/lualine.nvim' " patched nerd font needed for icons
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
@@ -315,6 +315,11 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
+    },
+    init_options = {
+      cache = {
+        directory = '.lsp-cache'
+      }
     }
   }
 end

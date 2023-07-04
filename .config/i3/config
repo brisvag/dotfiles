@@ -161,7 +161,7 @@ bindsym $mod+XF86AudioPlay exec spotify
 # open ranger (file mamager)
 bindsym $mod+r exec alacritty -e ranger "`xcwd`"
 # take a screenshot using the import command from imagemagick and xclip to copy to clipboard
-bindsym --release $mod+p exec "import ~/pictures/i3screenshot.png && xclip -selection clipboard -target image/png ~/pictures/i3screenshot.png"
+bindsym --release $mod+p exec "import ~/Pictures/i3screenshot.png && xclip -selection clipboard -target image/png ~/Pictures/i3screenshot.png"
 # open bluetooth manager
 bindsym $mod+b exec blueman-manager
 # scratchpad apps
@@ -198,6 +198,8 @@ bindsym XF86AudioPrev exec playerctl previous
 # Brightness controls
 bindsym XF86MonBrightnessDown exec "light -U 5"
 bindsym XF86MonBrightnessUp exec "light -A 5"
+# toggle notifications
+bindsym $mod+Mod1+n exec "notify-send dunst 'Notifications toggled.'; sleep 2; dunstctl set-paused toggle"
 # remember that $mod+Shift+n is used by dunst to close all notifications!
 
 
@@ -205,15 +207,13 @@ bindsym XF86MonBrightnessUp exec "light -A 5"
 # STARTUP COMMANDS #
 # ################ #
 
-# monitor setup and polybar (need to run in series to avoid race condition)
 exec --no-startup-id "$XDG_CONFIG_HOME/xrandr/screen_layout.sh; ~/.config/polybar/launch.sh"
 exec --no-startup-id /usr/bin/lxqt-policykit-agent
 exec --no-startup-id nm-applet
-exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id blueman-applet
 exec --no-startup-id dunst -conf .config/dunst/dunstrc
 # composite manager for transparency and other improvements
-exec --no-startup-id picom --config ~/.config/picom.conf --experimental-backends --blur-method dual_kawase --blur-strength 3 -b
+exec --no-startup-id picom --config ~/.config/picom.conf --blur-method dual_kawase --blur-strength 3 -b
 exec --no-startup-id ~/.config/i3/wallpaper.sh
 exec --no-startup-id setxkbmap -layout us
 # unclutter (auto-hide cursor)
@@ -226,4 +226,6 @@ exec --no-startup-id setxkbmap -option caps:swapescape
 exec --no-startup-id i3-msg 'exec firefox; exec keepassxc; exec whatsapp-nativefier; exec google-calendar-nativefier; exec signal-desktop --use-tray-icon; exec zulip'
 exec --no-startup-id udiskie --tray
 # auto-hide scratchpad windows
-exec_always --no-startup-id ~/build/i3-tools/auto_scratchpad.py True,,,whatsapp-nativefier-d40211,, True,,,googlecalendar-nativefier-e22938,, True,,,signal,, True,,,zulip,,
+exec_always --no-startup-id ~/.config/i3/auto_scratchpad.py True,,,whatsapp-nativefier,, True,,,googlecalendar-nativefier,, True,,,signal,, True,,,zulip,,
+# monitor setup and polybar (need to run in series to avoid race condition)
+exec --no-startup-id ~/.config/polybar/launch.sh
