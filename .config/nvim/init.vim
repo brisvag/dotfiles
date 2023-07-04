@@ -108,15 +108,15 @@ Plug 'RRethy/vim-hexokinase' " requires hexokinase binary
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
+Plug 'abeleinin/papyrus'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'bronson/vim-visual-star-search'
 Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'ethanholz/nvim-lastplace'
-Plug 'folke/trouble.nvim'
 Plug 'f-person/git-blame.nvim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'folke/trouble.nvim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kkoomen/vim-doge', { 'do': ':call doge#install()'}
 Plug 'kyazdani42/nvim-tree.lua'
@@ -148,6 +148,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-test/vim-test'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
@@ -206,9 +207,6 @@ imap <m-tab> <Plug>(neosnippet_expand_or_jump)
 smap <m-tab> <Plug>(neosnippet_expand_or_jump)
 xmap <m-tab> <Plug>(neosnippet_expand_target)
 let g:neosnippet#snippets_directory="${XDG_DATA_HOME}/nvim/custom/snippets"
-
-" AUTOPAIR
-let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " VIMTEX and latex-related
 " Enable latex filetype even for empty .tex files
@@ -292,6 +290,8 @@ local on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+  buf_set_keymap('n', 'gsd', ':sp<cr><cmd>lua vim.lsp.buf.definition()<cr>', opts)
+  buf_set_keymap('n', 'gvsd', ':vs<cr><cmd>lua vim.lsp.buf.definition()<cr>', opts)
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
   buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.lsp_finder()<cr>', opts)
@@ -309,7 +309,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'julials' }
+local servers = { 'pylsp', 'julials', 'ccls', 'typst_lsp'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -415,3 +415,14 @@ nmap ga <Plug>(EasyAlign)
 
 " DOGE
 let g:doge_doc_standard_python = 'numpy'
+
+" PAPYRUS
+let g:papyrus_latex_engine = 'xelatex'
+let g:papyrus_viewer = 'okular'
+let g:papyrus_template = 'default'
+
+map <leader>pc :PapyrusCompile<CR>
+map <leader>pa :PapyrusAutoCompile<CR>
+map <leader>pv :PapyrusView<CR>
+map <leader>ps :PapyrusStart<CR>
+map <leader>ph :PapyrusHeader<CR>
