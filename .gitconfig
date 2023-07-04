@@ -46,3 +46,5 @@
 	whitespace = red reverse
 [color]
 	ui = true
+[url "https://github.com"]
+	insteadOf = git://github.com

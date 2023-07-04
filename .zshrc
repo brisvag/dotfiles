@@ -146,6 +146,7 @@ alias xclip='xclip -selection c'  # send to system clipboard by default
 # requires:
 # - git init --bare $HOME/.dotfiles
 # - dot git config --local status.showUntrackedFiles no
+# - dot git remote add origin git@github.com:brisvag/dotfiles.git
 alias dot='GIT_DIR=~/.dotfiles/ GIT_WORK_TREE=~/ '
 alias dotlist='dot git ls-tree --full-tree --name-only -r HEAD'
 alias sysdot='GIT_DIR=~/.system_dotfiles/ GIT_WORK_TREE=/ '

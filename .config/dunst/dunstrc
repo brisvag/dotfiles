@@ -1,5 +1,6 @@
 [global]
-follow = mouse
+follow = keyboard
+enable_posix_regex=true
 width = 375
 height = 200
 offset = 20x20
@@ -38,5 +39,13 @@ timeout = 15
 background = "#700000"
 foreground = "#FFFFFF"
 timeout = 0
+
+[whatsapp]
+appname = "whatsapp-nativefier"
+format = "<span size="x-large" weight="ultrabold">Whatsapp</span>\n<span size="large" style="italic">%s</span>\n%b\n%p"
+
+[calendar]
+appname = "google-calendar-nativefier"
+format = "<span size="x-large" weight="ultrabold">Google Calendar</span>\n<span size="large" style="italic">%s</span>\n%b\n%p"
 
 # vim: ft=cfg
