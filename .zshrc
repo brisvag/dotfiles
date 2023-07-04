@@ -91,7 +91,9 @@ export FREEMOL="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol"
 export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHONPATH"
 
 # cuda
-export PATH="$PATH:/opt/cuda/bin"
+export CUDA_PATH="/opt/cuda-11.1"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
 
 # ruby
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
@@ -198,6 +200,7 @@ dynamo () {
     source dynamo_activate_linux_shipped_MCR.sh
     cd $tmp
 }
+alias aretomo="$HOME/Downloads/aretomo/AreTomo_1.3.4_Cuda111_Feb22_2023 "
 
 # imod
 export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"

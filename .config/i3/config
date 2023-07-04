@@ -59,11 +59,11 @@ for_window [instance="googlecalendar-nativefier(.*)"] move scratchpad
 for_window [instance="googlecalendar-nativefier(.*)"] scratchpad show, resize set 1400 900, move position center, scratchpad show
 for_window [instance="signal"] move scratchpad
 for_window [instance="signal"] scratchpad show, resize set 1400 900, move position center, scratchpad show
-# fix vmd layout on startup
-for_window [title="VMD Main"] floating toggle
-for_window [title="VisPy canvas"] floating toggle
-# chimera dialogs
-for_window [class="Toplevel"] floating toggle
+# floating dialogs (vmd, vispy, chimera, relion)
+for_window [title="VMD Main"] floating enable
+for_window [title="VisPy canvas"] floating enable
+for_window [class="Toplevel"] floating enable
+for_window [class="FLTK"] floating enable
 
 
 # ############ #
