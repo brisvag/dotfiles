@@ -129,6 +129,7 @@ mcd () {mkdir -p "$1" && cd "$1"}
 up () {yay; vi +PlugUpdate +TSUpdate +qall}
 alias pip_publish='python -m build && twine upload dist/*'
 alias rsync_all='rsync -avztuhHAXP'
+alias rsync_remote='rsync -rlvztuhHP'
 alias dud='dust -d 1'
 alias pydbg='python -m ipdb -c continue'
 alias pytestdbg='pytest -s --pdb --pdbcls=IPython.terminal.debugger:Pdb'
@@ -169,6 +170,7 @@ grau () {git remote add upstream "git@github.com:$1/$(git_repo_name).git"}
 gclo () {git clone git@github.com:brisvag/$1.git}
 alias gfork="gh repo fork --clone --remote"
 alias ghrw="gr repo view -w"
+alias grbum='git rebase upstream/$(git_main_branch)'
 
 # virtualenv
 export WORKON_HOME="~/venv"
