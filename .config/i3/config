@@ -226,7 +226,7 @@ bindsym $mod+Mod1+n exec "notify-send dunst 'Notifications toggled.'; sleep 2; d
 # STARTUP COMMANDS #
 # ################ #
 
-exec --no-startup-id "$XDG_CONFIG_HOME/xrandr/screen_layout.sh; ~/.config/polybar/launch.sh"
+exec --no-startup-id "$XDG_CONFIG_HOME/xrandr/screen_layout.sh"
 exec --no-startup-id /usr/bin/lxqt-policykit-agent
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
