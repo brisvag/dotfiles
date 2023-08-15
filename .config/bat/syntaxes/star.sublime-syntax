@@ -1,0 +1,90 @@
+%YAML 1.2
+---
+name: STAR
+file_extensions: [star]
+scope: source.star
+
+contexts:
+  main:
+    - meta_content_scope: meta.main
+    - match: ^loop_
+      scope: keyword.control.c
+      push: loop1
+    - include: go_comment
+    - match: ^\S+
+      scope: markup.bold
+  start_rows:
+    - match: ^\s*[^_]\S+
+      set: row1
+  end_rows:
+    - match: ^$
+      pop: true
+    - match: \n
+      set: row5
+  go_comment:
+    - match: "#"
+      push: comment
+  comment:
+    - meta_scope: comment.line.number-sign
+    - match: \n
+      pop: true
+  loop1:
+    - meta_content_scope: constant.numeric
+    - include: start_rows
+    - include: go_comment
+    - match: ^\S+
+      set: loop2
+  loop2:
+    - meta_content_scope: markup.list
+    - include: start_rows
+    - include: go_comment
+    - match: ^\S+
+      set: loop3
+  loop3:
+    - meta_content_scope: markup.heading
+    - include: start_rows
+    - include: go_comment
+    - match: ^\S+
+      set: loop4
+  loop4:
+    - meta_content_scope: support.function
+    - include: start_rows
+    - include: go_comment
+    - match: ^\S+
+      set: loop5
+  loop5:
+    - meta_content_scope: support.class
+    - include: start_rows
+    - include: go_comment
+    - match: ^\S+
+      set: loop1
+  row1:
+    - meta_scope: constant.numeric
+    - include: end_rows
+    - include: go_comment
+    - match: \S+
+      set: row2
+  row2:
+    - meta_scope: markup.list
+    - include: end_rows
+    - include: go_comment
+    - match: \S+
+      set: row3
+  row3:
+    - meta_scope: markup.heading
+    - include: end_rows
+    - include: go_comment
+    - match: \S+
+      set: row4
+  row4:
+    - meta_scope: support.function
+    - include: end_rows
+    - include: go_comment
+    - match: \S+
+      set: row5
+  row5:
+    - meta_scope: support.class
+    - include: end_rows
+    - include: go_comment
+    - match: \S+
+      set: row1

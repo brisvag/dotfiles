@@ -5,7 +5,7 @@ width = 375
 height = 200
 offset = 20x20
 idle_threshold = 120
-font = JuliaMono 11
+font = MesloLGS NF 11
 
 format = "<span size="x-large" weight="ultrabold">%a</span>\n<span size="large" style="italic">%s</span>\n%b\n%p"
 transparency = 5
