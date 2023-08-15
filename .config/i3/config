@@ -8,7 +8,7 @@
 set $mod Mod4
 
 # APPEARANCE
-font pango:JuliaMono bold 11
+font pango:MesloLGS NF bold 11
 # colors
 set $bg_act             #505050
 set $text_act           #FFFFFF
@@ -27,13 +27,8 @@ client.unfocused        $bg_inact   $bg_inact   $text_act   $bg_inact       $bg_
 client.urgent           $bg_urg     $bg_urg     $text_urg   $bg_urg         $bg_urg
 client.placeholder      $plhold     $plhold     $text_act   $plhold         $plhold
 client.background       $bg_client
-# add gaps (if you want to remove title bars, change 'normal' to 'pixel')
+# add borders (if you want to remove title bars, change 'normal' to 'pixel')
 for_window [class="^.*"] border pixel 1
-# gaps inner 8
-# gaps outer -1
-# # show borders and gaps only when the workspace has more than one container
-# smart_borders on
-# smart_gaps on
 
 # WINDOW-SPECIFIC SETTINGS
 
@@ -171,6 +166,7 @@ bindsym $mod+c [instance="googlecalendar-nativefier"] scratchpad show
 bindsym $mod+z [instance="zulip"] scratchpad show
 
 # $mod+Shift+p is taken by keepass!
+# $mod+u is taken by ibus for keyboard switch
 
 # SYSTEM SHORTCUTS
 
@@ -185,8 +181,6 @@ bindsym $mod+Shift+r exec systemctl reboot
 # shutdown
 bindsym $mod+Shift+s exec shutdown now
 
-# $mod+u is taken by ibus for keyboard switch
-
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
@@ -198,7 +192,7 @@ bindsym XF86AudioPrev exec playerctl previous
 # Brightness controls
 bindsym XF86MonBrightnessDown exec "light -U 5"
 bindsym XF86MonBrightnessUp exec "light -A 5"
-# toggle notifications
+# toggle notifications (mod1 = alt)
 bindsym $mod+Mod1+n exec "notify-send dunst 'Notifications toggled.'; sleep 2; dunstctl set-paused toggle"
 # remember that $mod+Shift+n is used by dunst to close all notifications!
 
@@ -229,3 +223,4 @@ exec_always --no-startup-id ~/.config/i3/auto_scratchpad.py True,,,whatsapp-nati
 # monitor setup and polybar (need to run in series to avoid race condition)
 exec --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id slimbookbattery --minimize
+exec --no-startup-id /usr/lib/pam_kwallet_init

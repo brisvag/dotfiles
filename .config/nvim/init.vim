@@ -70,26 +70,13 @@ imap jj <esc>
 " space to open/close a fold and Ctrl space to do toggle all folding
 nnoremap <space> za
 nnoremap <expr> <C-space> &foldlevel ? 'zM' :'zR'
-" toggle on/off spellcheck
-let b:spell_toggled=0
-function ToggleSpellCheck()
-    if b:spell_toggled == 0
-        setlocal spell spelllang=en_us
-        let b:spell_toggled=1
-    else
-        setlocal nospell
-        let b:spell_toggled=0
-    endif
-endfunction
-nnoremap <c-g> :call ToggleSpellCheck()<cr>
 " accept local or remote changes with mergetool
-nnoremap <A-,> :diffget LOCAL<CR>
-nnoremap <A-.> :diffget REMOTE<CR>
-nnoremap <A-/> :diffget BASE<CR>
-vnoremap <A-,> :diffget LOCAL<CR>
-vnoremap <A-.> :diffget REMOTE<CR>
-vnoremap <A-/> :diffget BASE<CR>
-
+nnoremap <A-,> :diffget LOCAL<cr>
+nnoremap <A-.> :diffget REMOTE<cr>
+nnoremap <A-/> :diffget BASE<cr>
+vnoremap <A-,> :diffget LOCAL<cr>
+vnoremap <A-.> :diffget REMOTE<cr>
+vnoremap <A-/> :diffget BASE<cr>
 
 " PLUGINS
 " Automatically install vim-plug
@@ -104,54 +91,48 @@ call plug#begin("$XDG_DATA_HOME/nvim/plugged")
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ElPiloto/telescope-vimwiki.nvim'
 Plug 'JuliaEditorSupport/julia-vim'
-Plug 'RRethy/vim-hexokinase' " requires hexokinase binary
+Plug 'RRethy/vim-hexokinase'  " requires hexokinase binary
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'abeleinin/papyrus'
 Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'bronson/vim-visual-star-search'
+Plug 'airblade/vim-rooter'  " sets wd to root of project
+Plug 'bronson/vim-visual-star-search'  " # and * works with visual mode
 Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'ethanholz/nvim-lastplace'
 Plug 'f-person/git-blame.nvim'
 Plug 'folke/trouble.nvim'
-Plug 'junegunn/vim-easy-align'
-Plug 'kkoomen/vim-doge', { 'do': ':call doge#install()'}
+Plug 'kkoomen/vim-doge', {'do': ':call doge#install()'}
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'kyazdani42/nvim-web-devicons' " needed for trouble and nvim-tree
+Plug 'kyazdani42/nvim-web-devicons'  " needed for trouble and nvim-tree
 Plug 'lambdalisue/suda.vim'
 Plug 'lervag/vimtex'
-Plug 'liuchengxu/vista.vim'
-Plug 'mfussenegger/nvim-dap'
-Plug 'mfussenegger/nvim-dap-python'
 Plug 'mg979/vim-visual-multi'
-Plug 'mhinz/neovim-remote'
+Plug 'mhinz/neovim-remote'  " dep of a few plugins?
 Plug 'mhinz/vim-startify'
 Plug 'neovim/nvim-lspconfig'
 Plug 'numToStr/Comment.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lualine/lualine.nvim' " patched nerd font needed for icons
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'nvim-lua/plenary.nvim'  " dep of telescope
+Plug 'nvim-lualine/lualine.nvim'  " patched nerd font needed for icons
+Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-context'  " shows outer functions/classes at top
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'nvim-treesitter/playground'
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'preservim/vim-pencil'
-Plug 'sickill/vim-pasta'
+Plug 'p00f/nvim-ts-rainbow'  " rainbow brackets from treesitter (might fail soon cause deprecation)
+Plug 'preservim/vim-pencil'  " small utility for writing prose (wrap, movement, etc)
+Plug 'sickill/vim-pasta'  " paste respecting indentation
 Plug 'tikhomirov/vim-glsl'
-Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'  " Git commands
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'  " cs, ds, ys mappings to change surrounding
+Plug 'tpope/vim-unimpaired'  " e.g: ]b ]e ]space yod yos
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-test/vim-test'
 Plug 'vimwiki/vimwiki'
-Plug 'wellle/targets.vim'
+Plug 'wellle/targets.vim'  " more text objects (like parens, commas, quotes..., args)
 call plug#end()
 
 
@@ -173,32 +154,32 @@ call deoplete#custom#var('omni', 'input_patterns', {'tex': g:vimtex#re#deoplete}
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<s-tab>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 
-" VISTA
-nnoremap <leader>v :Vista!!<cr>
-let g:vista_stay_on_open = 0
-"let g:vista_default_executive = 'nvim_lsp'
-
 " NVIM-TREE
-lua require'nvim-tree'.setup()
+lua << EOF
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+require'nvim-tree'.setup()
+EOF
 nnoremap <leader>t :NvimTreeToggle<cr>
 " auto-close if last remaining
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
 " LUALINE
 lua << EOF
+local git_blame = require('gitblame')
 require('lualine').setup {
     options = {
         globalstatus = true,
         theme = 'gruvbox_dark',
-        sections = {
-            lualine_a = {'mode'},
-            lualine_b = {'branch', 'diff', {'diagnostics', sources={'nvim_diagnostic'}}},
-            lualine_c = {'filename'},
-            lualine_x = {'buffers'},
-            lualine_y = {'progress'},
-            lualine_z = {'location'}
-        },
-    }
+    },
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', {'diagnostics', sources={'nvim_diagnostic', 'nvim_lsp'}}},
+        lualine_c = {'filename', {git_blame.get_current_blame_text, cond=git_blame.is_blame_text_available}},
+        lualine_x = {'buffers', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'},
+    },
 }
 EOF
 
@@ -272,50 +253,13 @@ nmap <leader>wq <Plug>VimwikiVSplitLink
 let g:vimwiki_global_ext = 0
 
 " LANGUAGE SERVER
+" NOTE: need to install python-lsp opt dependencies! see https://github.com/python-lsp/python-lsp-server
+"       on arch: python-lsp-all and python-lsp-ruff
 lua << EOF
 local nvim_lsp = require('lspconfig')
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- require('folding').on_attach()
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-  buf_set_keymap('n', 'gsd', ':sp<cr><cmd>lua vim.lsp.buf.definition()<cr>', opts)
-  buf_set_keymap('n', 'gvsd', ':vs<cr><cmd>lua vim.lsp.buf.definition()<cr>', opts)
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-  buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.lsp_finder()<cr>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-  buf_set_keymap('n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.open_float()<cr>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.setloclist()<cr>', opts)
-  -- buf_set_keymap('n', '<leader>ds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
-  buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
 local servers = { 'pylsp', 'julials', 'ccls', 'typst_lsp'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
     init_options = {
       cache = {
         directory = '.lsp-cache'
@@ -323,37 +267,80 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+-- Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gsd', function() vim.api.nvim_command('split') vim.lsp.buf.definition() end, opts)
+    vim.keymap.set('n', 'gvsd', function() vim.api.nvim_command('vsplit') vim.lsp.buf.definition() end, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+  end,
+})
 EOF
 
 " TELESCOPE
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope grep_string only_sort_text=true<cr>  "vim-telescope/telescope.nvim#564
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fz <cmd>Telescope current_buffer_fuzzy_find<cr>
-nnoremap <leader>fw <cmd>Telescope vimwiki<cr>
 lua <<EOF
-    local telescope = require("telescope")
+local telescope = require("telescope")
+local builtin = require('telescope.builtin')
 
-    telescope.setup {
-        defaults = {
-            set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
-        },
-        pickers = {
-            find_files = {
-                find_command = {
-                    "fd",
-                    "--type", "file",
-                    "--exclude", ".git/",
-                    "--hidden",  -- show hidden files
-                },
+telescope.setup {
+    defaults = {
+        set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
+    },
+    pickers = {
+        find_files = {
+            find_command = {
+                "fd",
+                "--type", "file",
+                "--exclude", ".git/",
+                "--hidden",  -- show hidden files
             },
         },
-    }
+    },
+}
 
-    telescope.load_extension('fzf')
-    telescope.load_extension('vimwiki')
+telescope.load_extension('fzf')
+telescope.load_extension('vimwiki')
+
+-- https://github.com/nvim-telescope/telescope.nvim/issues/564#issuecomment-1410204181
+function fuzzyFindFiles()
+    require'telescope.builtin'.grep_string({
+    path_display = { 'tail' },
+    only_sort_text = true,
+    search = '',
+  })
+end
+
+vim.keymap.set('n', '<leader>ff', builtin.find_files)
+vim.keymap.set('n', '<leader>fg', fuzzyFindFiles)
+vim.keymap.set('n', '<leader>fb', builtin.buffers)
+vim.keymap.set('n', '<leader>fh', builtin.help_tags)
+vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find)
+vim.keymap.set('n', '<leader>fw', telescope.extensions.vimwiki.vimwiki)
+vim.keymap.set('n', '<leader>fm', builtin.keymaps)
 EOF
 
 
@@ -370,6 +357,7 @@ augroup END
 " TREESITTER
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "python", "julia", "json", "glsl", "latex", "bash", "vim", "lua"},
@@ -390,7 +378,29 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   },
   textobjects = {
-    enable = true
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["as"] = "@scope.outer",
+        ["is"] = "@scope.inner",
+        ["ap"] = "@parameter.outer",
+        ["ip"] = "@parameter.inner",
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>a"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>A"] = "@parameter.inner",
+      },
+    },
   },
   context = {
     enable = true
@@ -426,8 +436,24 @@ let g:papyrus_latex_engine = 'xelatex'
 let g:papyrus_viewer = 'okular'
 let g:papyrus_template = 'default'
 
-map <leader>pc :PapyrusCompile<CR>
-map <leader>pa :PapyrusAutoCompile<CR>
-map <leader>pv :PapyrusView<CR>
-map <leader>ps :PapyrusStart<CR>
-map <leader>ph :PapyrusHeader<CR>
+map <leader>pc :PapyrusCompile<cr>
+map <leader>pa :PapyrusAutoCompile<cr>
+map <leader>pv :PapyrusView<cr>
+map <leader>ps :PapyrusStart<cr>
+map <leader>ph :PapyrusHeader<cr>
+
+" SPLITJOIN
+let g:splitjoin_split_mapping = ''
+let g:splitjoin_join_mapping  = ''
+nnoremap <leader>s :SplitjoinSplit<cr>
+nnoremap <leader>j :SplitjoinJoin<cr>
+let g:splitjoin_trailing_comma = 1
+let g:splitjoin_python_brackets_on_separate_lines = 1
+
+" GIT-BLAME
+nnoremap <leader>gc :GitBlameOpenCommitURL
+" disable virtual text cause we show it in lualine
+let g:gitblame_display_virtual_text = 0
+
+" GITGUTTER
+nnoremap <leader>hd :GitGutterDiffOrig<cr>

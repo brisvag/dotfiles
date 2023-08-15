@@ -1,12 +1,9 @@
 export ZSH="/usr/share/oh-my-zsh"
 
-ZSH_THEME="bira"
-
 plugins=(
     archlinux
     bgnotify
     colored-man-pages
-    colorize
     command-not-found
     common-aliases
     dirhistory
@@ -48,32 +45,25 @@ function bgnotify_formatted {
 # FZF
 export FZF_DEFAULT_COMMAND='fd'
 
-# initialize some stuff
+# initialize ohmyzsh and fix completion
 source $ZSH/oh-my-zsh.sh
-
-# completion
 autoload -Uz compinit
 compinit # added to fix missing completion stuff, such as yay
+
+# fancy theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Share history between open terminals, only find unique history with up/down
 setopt inc_append_history hist_find_no_dups
 
-# Fix behaviour of home/end buttons
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[4~" end-of-line
-bindkey "^[[3~" delete-char
-
-# Colorscheme
-$HOME/build/theme.sh/bin/theme.sh gruvbox-dark
-
-# SOURCES
-
-# travis-ci completion
-[ -f /home/brisvag/.travis/travis.sh ] && source /home/brisvag/.travis/travis.sh
-
-# fzf completion and search
+# fzf completion and search (off by default for arch fzf package)
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
 
 # PATHS AND OTHER EXPORTS
 
@@ -86,18 +76,15 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # additional paths
 export PATH="$HOME/scripts:$PATH"
 
-# pymol
-export FREEMOL="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol"
-export PYTHONPATH="$HOME/.cache/yay/freemol-svn/freemol-svn/freemol/libpy:$PYTHONPATH"
-
 # cuda
 export PATH="$PATH:/opt/cuda/bin"
 
-# ruby
-export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
-
 # python debug
 export PYTHONBREAKPOINT="ipdb.set_trace"
+
+# virtualenv
+export WORKON_HOME="~/venv"
+source /usr/bin/virtualenvwrapper.sh
 
 # ALIASES AND SIMILAR
 
@@ -109,7 +96,7 @@ alias lt='l -s new'
 alias ltree='l -TI "__pycache__"'
 alias lg='l --git-ignore'
 alias rg='rg -S'
-alias cat='bat'
+alias cat='bat --theme=gruvbox-dark'
 alias rm='rm -I'
 alias vi='nvim'
 alias vim='vi'
@@ -123,7 +110,7 @@ alias :q='exit'
 alias q='exit'
 alias open='xdg-open'
 alias feh='feh -d.'
-up () {(set -e; yay; vi +PlugUpdate +TSUpdate +qall)}
+up () {(set -e; yay; vi +UpdateRemotePlugins +TSUpdateSync +PlugUpdate +qall; sudo pkgfile -u)}
 alias pip_publish='python -m build && twine upload dist/*'
 alias rsync_all='rsync -avztuhHAXP'
 alias rsync_remote='rsync -rlvztuhHP'
@@ -131,12 +118,12 @@ alias dud='dust -d 1'
 alias pydbg='python -m ipdb -c continue'
 alias pytestdbg='pytest -s --pdb --pdbcls=IPython.terminal.debugger:Pdb'
 alias F="| fzf"
-alias fzcat='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
-tailf () {tail -F "$@" | bat --paging=never}
+alias fzcat='fzf --preview "cat --color=always --style=numbers --line-range=:500 {}"'
+tailf () {tail -F "$@" | cat --paging=never}
 unalias help  # man alias
-help () {"$@" --help 2>&1 | bat --plain --language=help}
-man () {/usr/bin/man "$@" | bat --plain --language=man}
-alias catw='bat --wrap never'
+help () {"$@" --help 2>&1 | cat --plain --language=help}
+man () {/usr/bin/man "$@" | cat --plain --language=man}
+alias catw='cat --wrap never'
 alias xclip='xclip -selection c'  # send to system clipboard by default
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
@@ -168,10 +155,7 @@ alias gfork="gh repo fork --clone --remote"
 alias ghrw="gr repo view -w"
 alias grbum='git rebase upstream/$(git_main_branch)'
 
-# virtualenv
-export WORKON_HOME="~/venv"
-source /usr/bin/virtualenvwrapper.sh
-
+# put this in a function so we use it only if needed (slow)
 conda_init () {
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
@@ -188,4 +172,3 @@ conda_init () {
     unset __conda_setup
     # <<< conda initialize <<<
 }
-
