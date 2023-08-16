@@ -141,6 +141,7 @@ help () {"$@" --help 2>&1 | bat --plain --language=help}
 man () {/usr/bin/man "$@" | bat --plain --language=man}
 alias catw='bat --wrap never'
 alias xclip='xclip -selection c'  # send to system clipboard by default
+pver () {python -c "import $1, importlib.metadata as im; print($1, '\n', im.version('$1'))"} 
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases
@@ -169,7 +170,7 @@ grao () {git remote add origin "git@github.com:brisvag/$(git_repo_name).git"}
 grau () {git remote add upstream "git@github.com:$1/$(git_repo_name).git"}
 gclo () {git clone git@github.com:brisvag/$1.git}
 alias gfork="gh repo fork --clone --remote"
-alias ghrw="gr repo view -w"
+alias ghrw="gh repo view -w"
 alias grbum='git rebase upstream/$(git_main_branch)'
 
 # virtualenv

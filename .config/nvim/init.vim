@@ -33,8 +33,6 @@ set background=dark
 let g:do_filetype_lua = 1
 "let g:did_load_filetypes = 0
 
-au BufRead,BufNewFile *.ipy set filetype=python
-au BufRead,BufNewFile *.qss set filetype=css
 " Automatically reload file when entering buffer or gaining focus
 au FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
 
@@ -90,6 +88,12 @@ vnoremap <A-,> :diffget LOCAL<CR>
 vnoremap <A-.> :diffget REMOTE<CR>
 vnoremap <A-/> :diffget BASE<CR>
 
+" print current syntax group under cursor
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+map gm :call SynGroup()<CR>
 
 " PLUGINS
 " Automatically install vim-plug
