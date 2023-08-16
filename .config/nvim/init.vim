@@ -75,6 +75,12 @@ nnoremap <A-/> :diffget BASE<cr>
 vnoremap <A-,> :diffget LOCAL<cr>
 vnoremap <A-.> :diffget REMOTE<cr>
 vnoremap <A-/> :diffget BASE<cr>
+" print current syntax group under cursor
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+map gm :call SynGroup()<CR>
 
 " PLUGINS
 " Automatically install vim-plug
@@ -139,7 +145,18 @@ call plug#end()
 " GRUVBOX
 let g:gruvbox_italic=1
 let g:gruvbox_transparent_bg=1
-colorscheme gruvbox
+lua << EOF
+local config = require("gruvbox").config
+local colors = require("gruvbox.palette").get_base_colors(vim.o.background, config.contrast)
+require("gruvbox").setup({
+    overrides = {
+        Character = {fg = colors.neutral_green, italic = config.italic.strings},
+        Float = {fg = colors.neutral_purple},
+        Boolean = {fg = colors.purple, bold = config.bold},
+    }
+})
+vim.cmd("colorscheme gruvbox")
+EOF
 
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
