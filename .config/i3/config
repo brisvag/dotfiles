@@ -176,6 +176,7 @@ bindsym $mod+XF86AudioPlay exec spotify
 bindsym $mod+r exec alacritty -e ranger "`xcwd`"
 # take a screenshot using the import command from imagemagick and xclip to copy to clipboard
 bindsym --release $mod+p exec "import ~/Pictures/i3screenshot.png && xclip -selection clipboard -target image/png ~/Pictures/i3screenshot.png"
+bindsym --release $mod+Mod1+p exec "import -window $(xwininfo | grep 'Window id' | awk '{print $4}') ~/Pictures/i3screenshot.png && xclip -selection clipboard -target image/png ~/Pictures/i3screenshot.png"
 # open bluetooth manager
 bindsym $mod+b exec blueman-manager
 # scratchpad apps
