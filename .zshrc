@@ -1,4 +1,19 @@
-export ZSH="/usr/share/oh-my-zsh"
+# PATHS AND OTHER EXPORTS
+
+# base paths
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# additional paths
+export PATH="$HOME/scripts:$PATH"
+
+# cuda
+export CUDA_PATH="/opt/cuda-11.1"
+
+# Share history between open terminals, only find unique history with up/down
+setopt inc_append_history hist_find_no_dups
 
 plugins=(
     archlinux
@@ -24,6 +39,26 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
+# plugin configs go here before sourcing ohmyzsh
+
+# FZF
+export FZF_DEFAULT_COMMAND='fd'
+
+# initialize ohmyzsh and fix completion
+export ZSH="/usr/share/oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+autoload -Uz compinit
+compinit # added to fix missing completion stuff, such as yay
+# fzf completion and search (off by default for arch fzf package)
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+# fancy theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # BGNOTIFY
 bgnotify_threshold=20
@@ -42,49 +77,20 @@ function bgnotify_formatted {
     echo -e '\a'
 }
 
-# FZF
-export FZF_DEFAULT_COMMAND='fd'
-
-# initialize ohmyzsh and fix completion
-source $ZSH/oh-my-zsh.sh
-autoload -Uz compinit
-compinit # added to fix missing completion stuff, such as yay
-
-# fancy theme
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Share history between open terminals, only find unique history with up/down
-setopt inc_append_history hist_find_no_dups
-
-# fzf completion and search (off by default for arch fzf package)
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-
-
-# PATHS AND OTHER EXPORTS
-
-# base paths
-export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-
-# additional paths
-export PATH="$HOME/scripts:$PATH"
-
-# cuda
-export PATH="$PATH:/opt/cuda/bin"
-
 # python debug
 export PYTHONBREAKPOINT="ipdb.set_trace"
 
 # virtualenv
 export WORKON_HOME="~/venv"
 source /usr/bin/virtualenvwrapper.sh
+
+# nnn
+export NNN_OPTS='aCdgDeirx'
+export NNN_PLUG='d:dragdrop;p:preview-tui'
+export NNN_ICONLOOKUP=1
+# for full usability, preview-tui requires:
+# - being in a TMUX
+# - having bat,exa,ueberzug,ffmpegthumbnailer,poppler,
 
 # ALIASES AND SIMILAR
 
@@ -98,11 +104,14 @@ alias lg='l --git-ignore'
 alias rg='rg -S'
 alias cat='bat --theme=gruvbox-dark'
 alias rm='rm -I'
+alias cp='advcp -ig'
+alias mv='advmv -ig'
 alias vi='nvim'
 alias vim='vi'
 alias vimrc='vi $XDG_CONFIG_HOME/nvim/init.vim'
 alias i3conf='vi $XDG_CONFIG_HOME/i3/config'
 alias r='ranger'
+alias n='nnn -F 0 -P p'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 dsf () {diff -u $@ | diff-so-fancy | less}
