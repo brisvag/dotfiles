@@ -121,7 +121,7 @@ alias :q='exit'
 alias q='exit'
 alias open='xdg-open'
 alias feh='feh -d.'
-up () {(set -e; yay; vi +UpdateRemotePlugins +TSUpdateSync +PlugUpdate +qall; sudo pkgfile -u)}
+up () {(set -e; yay; vi +TSUpdateSync +PlugUpdate +UpdateRemotePlugins +qall; sudo pkgfile -u)}
 alias pip_publish='python -m build && twine upload dist/*'
 alias rsync_all='rsync -avztuhHAXP'
 alias rsync_remote='rsync -rlvztuhHP'

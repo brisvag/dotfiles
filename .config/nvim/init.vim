@@ -81,6 +81,12 @@ function! SynGroup()
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 map gm :call SynGroup()<CR>
+" terminal enter/exit easily
+nnoremap <leader>t :sp +te<cr>:startinsert<cr>
+nnoremap <leader>vt :vs +te<cr>:startinsert<cr>
+tnoremap <esc> <c-\><c-n>
+" populate quickfix. Note this is overwritten by LSP if present???
+nnoremap <leader>Q :cad<cr>:cw<cr>
 
 " PLUGINS
 " Automatically install vim-plug
@@ -175,7 +181,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 require'nvim-tree'.setup()
 EOF
-nnoremap <leader>t :NvimTreeToggle<cr>
+nnoremap <leader>n :NvimTreeToggle<cr>
 " auto-close if last remaining
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
@@ -283,13 +289,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -300,7 +299,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
+    local opts = { buffer = ev.buf , noremap = true}
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gsd', function() vim.api.nvim_command('split') vim.lsp.buf.definition() end, opts)
     vim.keymap.set('n', 'gvsd', function() vim.api.nvim_command('vsplit') vim.lsp.buf.definition() end, opts)
