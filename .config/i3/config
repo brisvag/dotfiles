@@ -241,3 +241,4 @@ exec_always --no-startup-id ~/.config/i3/auto_scratchpad.py True,,,whatsapp-nati
 # monitor setup and polybar (need to run in series to avoid race condition)
 exec --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/pam_kwallet_init
+exec --no-startup-id spotblock-rs
