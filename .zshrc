@@ -121,8 +121,8 @@ alias open='xdg-open'
 alias feh='feh -d.'
 up () {(set -e; yay; vi +TSUpdateSync +PlugUpdate +UpdateRemotePlugins +qall; sudo pkgfile -u)}
 alias pip_publish='python -m build && twine upload dist/*'
-alias rsync_all='rsync -avztuhHAXP'
-alias rsync_remote='rsync -rlvztuhHP'
+alias rsync_all='rsync -avztuhHAXP --info=progress2'
+alias rsync_remote='rsync -rlvztuhHP --info=progress2'
 alias dud='dust -d 1'
 alias pydbg='python -m ipdb -c continue'
 alias pytestdbg='pytest -s --pdb --pdbcls=IPython.terminal.debugger:Pdb'
@@ -163,6 +163,7 @@ gclo () {git clone git@github.com:brisvag/$1.git}
 alias gfork="gh repo fork --clone --remote"
 alias ghrw="gr repo view -w"
 alias grbum='git rebase upstream/$(git_main_branch)'
+alias fzalias='alias | fzf'
 
 # put this in a function so we use it only if needed (slow)
 conda_init () {
