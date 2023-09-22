@@ -10,7 +10,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export PATH="$HOME/scripts:$PATH"
 
 # cuda
-export CUDA_PATH="/opt/cuda-11.1"
+export CUDA_PATH="/opt/cuda"
 export PATH="$CUDA_PATH/bin:$PATH"
 export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
 
@@ -92,13 +92,13 @@ export NNN_PLUG='d:dragdrop;p:preview-tui'
 export NNN_ICONLOOKUP=1
 # for full usability, preview-tui requires:
 # - being in a TMUX
-# - having bat,exa,ueberzug,ffmpegthumbnailer,poppler,
+# - having bat,eza,ueberzug,ffmpegthumbnailer,poppler,
 
 # ALIASES AND SIMILAR
 
 # basic aliases
 alias sudo='sudo '	# space needed to sudo other aliases
-alias l='exa -lh --git --group-directories-first'
+alias l='eza -lh --git --group-directories-first'
 alias la='l -a'
 alias lt='l -s new' 
 alias ltree='l -TI "__pycache__"'
