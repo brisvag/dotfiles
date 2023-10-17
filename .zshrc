@@ -167,4 +167,4 @@ alias ghrw="gr repo view -w"
 alias grbum='git rebase upstream/$(git_main_branch)'
 alias fzalias='alias | fzf'
 
-alias conda_source='eval "$(/home/lorenzo/miniconda3/bin/conda shell.zsh hook)"'
+alias conda_source='eval "$($HOME/miniconda3/bin/conda shell.zsh hook)"'
