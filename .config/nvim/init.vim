@@ -153,7 +153,7 @@ let g:gruvbox_italic=1
 let g:gruvbox_transparent_bg=1
 lua << EOF
 local config = require("gruvbox").config
-local colors = require("gruvbox.palette").get_base_colors(vim.o.background, config.contrast)
+local colors = require("gruvbox").palette
 require("gruvbox").setup({
     overrides = {
         Character = {fg = colors.neutral_green, italic = config.italic.strings},
