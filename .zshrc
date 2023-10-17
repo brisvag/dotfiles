@@ -9,10 +9,10 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # additional paths
 export PATH="$HOME/scripts:$PATH"
 
-# cuda
-export CUDA_PATH="/opt/cuda"
-export PATH="$CUDA_PATH/bin:$PATH"
-export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
+# cuda (uncomment to switch versions)
+# export CUDA_PATH="/opt/cuda-11.7/"
+# export PATH="$CUDA_PATH/bin:$PATH"
+# export LD_LIBRARY_PATH="$CUDA_PATH/lib64:$LD_LIBRARY_PATH"
 
 # Share history between open terminals, only find unique history with up/down
 setopt inc_append_history hist_find_no_dups
