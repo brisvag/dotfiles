@@ -167,20 +167,4 @@ alias ghrw="gr repo view -w"
 alias grbum='git rebase upstream/$(git_main_branch)'
 alias fzalias='alias | fzf'
 
-# put this in a function so we use it only if needed (slow)
-conda_init () {
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/opt/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "/opt/mambaforge/etc/profile.d/conda.sh" ]; then
-            . "/opt/mambaforge/etc/profile.d/conda.sh"
-        else
-            export PATH="/opt/mambaforge/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-    # <<< conda initialize <<<
-}
+alias conda_source='eval "$(/home/lorenzo/miniconda3/bin/conda shell.zsh hook)"'
