@@ -209,4 +209,4 @@ source $HOME/bin/imod/IMOD-linux.sh
 
 export JULIA_NUM_THREADS=32
 
-alias conda_source='eval "$(/home/lorenzo/miniconda3/bin/conda shell.zsh hook)"'
+alias conda_source='eval "$($HOME/miniconda3/bin/conda shell.zsh hook)"'
