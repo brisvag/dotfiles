@@ -13,11 +13,11 @@ monitors=$(xrandr --query | grep " connected")
 for monitor in $monitors; do
     m=$(echo $monitor | cut -d" " -f1)
     if [[ "$monitor" == *primary* ]]; then
-        tray="right"
+        bar="primary"
     else
-        tray='none'
+        bar='secondary'
     fi
-    MONITOR=$m TRAY=$tray polybar --reload bottom &
+    MONITOR=$m polybar --reload $bar &
 done
 
 echo "Bars launched..."
