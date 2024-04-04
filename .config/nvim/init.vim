@@ -137,6 +137,7 @@ Plug 'p00f/nvim-ts-rainbow'  " rainbow brackets from treesitter (might fail soon
 Plug 'preservim/vim-pencil'  " small utility for writing prose (wrap, movement, etc)
 Plug 'sickill/vim-pasta'  " paste respecting indentation
 Plug 'tikhomirov/vim-glsl'
+Plug 'tpope/vim-abolish'  " Smart-case replace with fancy plural handling and stuff
 Plug 'tpope/vim-fugitive'  " Git commands
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'  " cs, ds, ys mappings to change surrounding
