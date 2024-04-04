@@ -260,3 +260,4 @@ image/x-portable-pixmap=feh.desktop
 image/bmp=feh.desktop
 image/vnd.zbrush.pcx=feh.desktop
 inode/directory=org.kde.dolphin.desktop
+x-scheme-handler/discord-747154846817452045=discord-747154846817452045.desktop
