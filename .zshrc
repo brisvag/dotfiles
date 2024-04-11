@@ -190,8 +190,6 @@ sqgpu () {
         }'
 }
 
-alias chimera='/opt/ucsf-chimera/bin/chimera'
-alias chimerax='~/build/chimerax-1.1/bin/ChimeraX'
 dynamo () {
     export CUDA_PATH=/opt/cuda8
     export CUDA_ROOT=/opt/cuda8
@@ -201,7 +199,6 @@ dynamo () {
     source dynamo_activate_linux_shipped_MCR.sh
     cd $tmp
 }
-alias aretomo="$HOME/Downloads/aretomo/AreTomo_1.3.4_Cuda111_Feb22_2023 "
 
 # imod
 export IMOD_CALIB_DIR="$HOME/build/imod-bin/ImodCalib"
@@ -210,3 +207,8 @@ source $HOME/bin/imod/IMOD-linux.sh
 export JULIA_NUM_THREADS=32
 
 alias conda_source='eval "$($HOME/miniconda3/bin/conda shell.zsh hook)"'
+alias scipion='/home/lorenzo/build/scipion/scipion3'
+
+
+## HEADER
+alias|shuf| head -n 1 | cowsay -W 1000
