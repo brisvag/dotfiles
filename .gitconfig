@@ -6,6 +6,7 @@
     pager = diff-so-fancy | bat -p
 [diff]
     submodule = log
+    algorithm = histogram
 [push]
     followTags = true
 [pull]

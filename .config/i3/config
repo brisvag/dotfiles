@@ -186,6 +186,7 @@ bindsym $mod+s [instance="signal"] scratchpad show
 bindsym $mod+w [instance="whatsapp-nativefier"] scratchpad show
 bindsym $mod+c [instance="googlecalendar-nativefier"] scratchpad show
 bindsym $mod+z [instance="zulip"] scratchpad show
+bindsym $mod+comma exec "rofi -modi emoji -show emoji -theme ~/.config/rofi/brisvag.rasi"
 
 # $mod+Shift+p is taken by keepass!
 # $mod+u is taken by ibus for keyboard switch
