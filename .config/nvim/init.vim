@@ -89,6 +89,8 @@ nnoremap <leader>vt :vs +te<cr>:startinsert<cr>
 tnoremap <esc> <c-\><c-n>
 " populate quickfix. Note this is overwritten by LSP if present???
 nnoremap <leader>Q :cad<cr>:cw<cr>
+" make sure gf always creates a file
+map gf :e <cfile><CR>
 
 " PLUGINS
 " Automatically install vim-plug

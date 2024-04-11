@@ -98,7 +98,7 @@ export NNN_ICONLOOKUP=1
 
 # basic aliases
 alias sudo='sudo '	# space needed to sudo other aliases
-alias l='eza -lh --git --group-directories-first'
+alias l='eza -lh@ --git --group-directories-first --color-scale --icons --smart-group'
 alias la='l -a'
 alias lt='l -s new' 
 alias ltree='l -TI "__pycache__"'
@@ -122,6 +122,7 @@ alias q='exit'
 alias open='xdg-open'
 alias feh='feh -d.'
 up () {(set -e; yay; vi +TSUpdateSync +PlugUpdate +UpdateRemotePlugins +qall; sudo pkgfile -u)}
+# alias pip="noglob uv pip"
 alias pip_publish='python -m build && twine upload dist/*'
 alias rsync_all='rsync -avztuhHAXP --info=progress2'
 alias rsync_remote='rsync -rlvztuhHP --info=progress2'
@@ -136,6 +137,8 @@ help () {"$@" --help 2>&1 | cat --plain --language=help}
 man () {/usr/bin/man "$@" | cat --plain --language=man}
 alias catw='cat --wrap never'
 alias xclip='xclip -selection c'  # send to system clipboard by default
+pver () {python -c "import $1, importlib.metadata as im; print($1, '\n', im.version('$1'))"} 
+alias htop='btop'
 
 # dotfiles stuff (https://www.atlassian.com/git/tutorials/dotfiles)
 # this alias with env variables is better because it allows the use of other git aliases
@@ -166,5 +169,8 @@ alias gfork="gh repo fork --clone --remote"
 alias ghrw="gr repo view -w"
 alias grbum='git rebase upstream/$(git_main_branch)'
 alias fzalias='alias | fzf'
+
+# aur update
+aurup () {updpkgsums && makepkg -sifc && makepkg --printsrcinfo > .SRCINFO}
 
 alias conda_source='eval "$($HOME/miniconda3/bin/conda shell.zsh hook)"'
